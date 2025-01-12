@@ -13,6 +13,7 @@
     "dev:web": "npm run dev --workspace=web",
     "dev:admin": "npm run dev --workspace=admin",
     "dev:api": "npm run dev --workspace=api",
-    "prisma:studio": "npm run prisma:studio --workspace=api"
+    "storybook": "npm run storybook --workspace=@memory-quasar/ui",
+    "db:view": "npm run prisma:studio --workspace=api"
   }
 }
