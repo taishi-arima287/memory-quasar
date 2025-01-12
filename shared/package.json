@@ -1,0 +1,47 @@
+{
+  "name": "@memory-quasar/shared",
+  "version": "0.1.0",
+  "private": true,
+  "main": "ui/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "storybook": "storybook dev -p 6007",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.0",
+    "@babel/plugin-syntax-typescript": "^7.22.0",
+    "@babel/plugin-transform-typescript": "^7.22.0",
+    "@babel/preset-env": "^7.22.0",
+    "@babel/preset-react": "^7.22.0",
+    "@babel/preset-typescript": "^7.22.0",
+    "@storybook/addon-actions": "^7.4.6",
+    "@storybook/addon-essentials": "^7.4.6",
+    "@storybook/addon-interactions": "^7.4.6",
+    "@storybook/addon-links": "^7.4.6",
+    "@storybook/blocks": "^7.4.6",
+    "@storybook/react": "^7.4.6",
+    "@storybook/react-webpack5": "^7.4.6",
+    "@storybook/testing-library": "^0.2.2",
+    "@storybook/types": "^7.4.6",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@types/jest": "^29.5.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/webpack": "^5.28.0",
+    "css-loader": "^6.8.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.5.0",
+    "storybook": "^7.4.6",
+    "style-loader": "^3.3.3",
+    "typescript": "^5.0.0",
+    "ts-jest": "^29.1.1",
+    "jest-environment-jsdom": "^29.7.0"
+  }
+}

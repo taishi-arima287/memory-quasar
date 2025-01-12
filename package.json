@@ -2,7 +2,8 @@
   "name": "memory-quasar",
   "private": true,
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "shared/*"
   ],
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",

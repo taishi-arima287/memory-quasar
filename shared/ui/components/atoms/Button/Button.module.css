@@ -1,0 +1,43 @@
+.button {
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.primary {
+  background-color: #0070f3;
+  color: white;
+}
+
+.secondary {
+  background-color: #666;
+  color: white;
+}
+
+.outline {
+  background-color: transparent;
+  border: 1px solid #0070f3;
+  color: #0070f3;
+}
+
+.small {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.medium {
+  padding: 12px 20px;
+  font-size: 16px;
+}
+
+.large {
+  padding: 16px 24px;
+  font-size: 18px;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+} 
