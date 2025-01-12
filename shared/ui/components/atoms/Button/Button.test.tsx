@@ -8,7 +8,7 @@ describe('shared/ui/components/atoms/Button/index.tsx', () => {
     expect(button).toBeInTheDocument();
     expect(button).toHaveClass('button');
     expect(button).toHaveClass('primary');
-    expect(button).toHaveClass('medium');
+    expect(button).toHaveClass('md');
   });
 
   it('クリックイベントが正しく発火すること', () => {
@@ -29,7 +29,7 @@ describe('shared/ui/components/atoms/Button/index.tsx', () => {
   });
 
   it('異なるサイズが正しく適用されること', () => {
-    render(<Button label="クリック" size="large" />);
-    expect(screen.getByText('クリック')).toHaveClass('large');
+    render(<Button label="クリック" size="lg" />);
+    expect(screen.getByText('クリック')).toHaveClass('lg');
   });
 }); 

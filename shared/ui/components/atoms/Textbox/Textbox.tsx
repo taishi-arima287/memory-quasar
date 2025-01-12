@@ -8,9 +8,11 @@ export interface TextboxProps {
   disabled?: boolean;
   error?: boolean;
   className?: string;
+  id?: string;
 }
 
 export const Textbox = ({
+  id,
   type = 'text',
   placeholder,
   value,
@@ -21,6 +23,7 @@ export const Textbox = ({
 }: TextboxProps) => {
   return (
     <input
+      id={id}
       type={type}
       className={`${styles.textbox} ${error ? styles.error : ''} ${className ?? ''}`}
       placeholder={placeholder}
