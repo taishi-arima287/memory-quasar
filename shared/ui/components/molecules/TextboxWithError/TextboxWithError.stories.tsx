@@ -15,7 +15,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    placeholder: 'テキストを入力してください',
+    label: 'メールアドレス',
+    placeholder: 'example@example.com',
     value: '',
     onChange: () => {},
   },
@@ -23,9 +24,39 @@ export const Default: Story = {
 
 export const WithError: Story = {
   args: {
-    placeholder: 'テキストを入力してください',
-    value: '不正な入力値',
+    label: 'メールアドレス',
+    placeholder: 'example@example.com',
+    value: 'invalid-email',
     onChange: () => {},
-    error: 'この項目は必須です',
+    error: 'メールアドレスの形式が正しくありません',
+  },
+};
+
+export const WithSize: Story = {
+  args: {
+    label: 'ユーザー名',
+    placeholder: 'ユーザー名を入力',
+    value: '',
+    onChange: () => {},
+    size: 'lg',
+  },
+};
+
+export const PasswordType: Story = {
+  args: {
+    label: 'パスワード',
+    type: 'password',
+    placeholder: '••••••••',
+    value: 'password123',
+    onChange: () => {},
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    label: '編集不可フィールド',
+    value: '編集できない値',
+    onChange: () => {},
+    disabled: true,
   },
 }; 

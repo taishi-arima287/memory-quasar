@@ -1,18 +1,35 @@
-import { Textbox, TextboxProps } from '../../atoms/Textbox/Textbox';
+import { TextboxProps, Textbox } from '../../atoms/Textbox';
 import styles from './TextboxWithError.module.css';
 
-interface TextboxWithErrorProps extends Omit<TextboxProps, 'error'> {
+export interface TextboxWithErrorProps extends Omit<TextboxProps, 'error' | 'className'> {
+  label: string;
   error?: string;
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
+  className?: string;
 }
 
 export const TextboxWithError = ({
+  label,
   error,
-  ...textboxProps
+  size = 'md',
+  className = '',
+  ...props
 }: TextboxWithErrorProps) => {
   return (
-    <div className={styles.container}>
-      <Textbox {...textboxProps} error={!!error} />
-      {error && <span className={styles.errorMessage}>{error}</span>}
+    <div className={`${styles.container} ${styles[size]} ${className}`}>
+      <label className={styles.label}>{label}</label>
+      <div className={styles.inputContainer}>
+        <Textbox
+          {...props}
+          error={!!error}
+          className={styles.textbox}
+        />
+        {error && (
+          <p className={styles.errorMessage}>
+            {error}
+          </p>
+        )}
+      </div>
     </div>
   );
 }; 
