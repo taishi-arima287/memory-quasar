@@ -4,7 +4,8 @@
   "private": true,
   "main": "ui/index.ts",
   "files": [
-    "ui/**/*"
+    "ui/**/*",
+    "styles/**/*"
   ],
   "scripts": {
     "build": "tsc",

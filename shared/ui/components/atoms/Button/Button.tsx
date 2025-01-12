@@ -1,25 +1,26 @@
+import { ButtonHTMLAttributes } from 'react';
 import styles from './Button.module.css';
 
-export interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'outline';
-  size?: 'small' | 'medium' | 'large';
+export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
   label: string;
-  onClick?: () => void;
-  disabled?: boolean;
+  variant?: 'primary' | 'secondary';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
+  className?: string;
 }
 
 export const Button = ({
-  variant = 'primary',
-  size = 'medium',
   label,
-  onClick,
-  disabled = false,
+  variant = 'primary',
+  size = 'md',
+  className = '',
+  type = 'button',
+  ...props
 }: ButtonProps) => {
   return (
     <button
-      className={`${styles.button} ${styles[variant]} ${styles[size]}`}
-      onClick={onClick}
-      disabled={disabled}
+      type={type}
+      className={`${styles.button} ${styles[variant]} ${styles[size]} ${className}`}
+      {...props}
     >
       {label}
     </button>

@@ -17,8 +17,9 @@
     "paths": {
       "@memory-quasar/ui": ["./ui"],
       "@/*": ["./ui/*"]
-    }
+    },
+    "types": ["node", "jest"]
   },
-  "include": ["ui/**/*.ts", "ui/**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.css"],
   "exclude": ["node_modules"]
 } 
