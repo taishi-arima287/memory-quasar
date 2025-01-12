@@ -36,9 +36,20 @@ const config = {
       (rule: any) => !rule.test?.test?.('.css')
     );
 
-    // 新しいCSSルールを追加
+    // グローバルCSSを先に処理
     config.module.rules.push({
       test: /\.css$/,
+      exclude: /\.module\.css$/,
+      use: [
+        'style-loader',
+        'css-loader',
+        'postcss-loader',
+      ],
+    });
+
+    // CSSモジュールを後で処理（優先度を上げるため）
+    config.module.rules.push({
+      test: /\.module\.css$/,
       use: [
         'style-loader',
         {
@@ -47,19 +58,13 @@ const config = {
             importLoaders: 1,
             modules: {
               auto: true,
-              localIdentName: '[name]__[local]--[hash:base64:5]',
+              localIdentName: '[local]_[hash:base64:5]',
+              exportLocalsConvention: 'camelCase',
             },
           },
         },
         'postcss-loader',
       ],
-      include: /\.module\.css$/,
-    });
-
-    config.module.rules.push({
-      test: /\.css$/,
-      use: ['style-loader', 'css-loader', 'postcss-loader'],
-      exclude: /\.module\.css$/,
     });
 
     return config;
