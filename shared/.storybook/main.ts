@@ -1,5 +1,4 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
-import type { Configuration } from 'webpack';
 
 const config = {
   stories: ['../ui/components/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -31,13 +30,15 @@ const config = {
   docs: {
     autodocs: true,
   },
-  webpackFinal: async (config: Configuration): Promise<Configuration> => {
-    const rules = config.module?.rules?.filter((rule: any) => {
-      return !(rule.test instanceof RegExp && rule.test.test('.css'));
-    }) || [];
+  webpackFinal: async (config: any) => {
+    // 既存のCSSルールを削除
+    config.module.rules = config.module.rules.filter(
+      (rule: any) => !rule.test?.test?.('.css')
+    );
 
-    rules.push({
-      test: /\.module\.css$/,
+    // 新しいCSSルールを追加
+    config.module.rules.push({
+      test: /\.css$/,
       use: [
         'style-loader',
         {
@@ -50,17 +51,19 @@ const config = {
             },
           },
         },
+        'postcss-loader',
       ],
+      include: /\.module\.css$/,
     });
 
-    return {
-      ...config,
-      module: {
-        ...config.module,
-        rules,
-      },
-    };
+    config.module.rules.push({
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader', 'postcss-loader'],
+      exclude: /\.module\.css$/,
+    });
+
+    return config;
   },
-} satisfies StorybookConfig;
+};
 
 export default config;
