@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { Button } from '@memory-quasar/ui';
+import { Button } from './Button';
 
 describe('Button', () => {
   it('renders with default props', () => {

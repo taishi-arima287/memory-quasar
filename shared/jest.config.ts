@@ -6,13 +6,18 @@ const config: Config = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   moduleNameMapper: {
     '\\.css$': 'identity-obj-proxy',
-    '^@memory-quasar/ui$': '<rootDir>/ui'
+    '^@memory-quasar/ui$': '<rootDir>/ui',
+    '^@/(.*)$': '<rootDir>/ui/$1'
   },
   transform: {
     '^.+\\.(ts|tsx)$': ['ts-jest', {
-      tsconfig: 'tsconfig.json'
+      tsconfig: '<rootDir>/tsconfig.json'
     }]
-  }
+  },
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    '/.next/'
+  ]
 };
 
 export default config; 
