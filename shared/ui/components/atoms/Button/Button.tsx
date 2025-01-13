@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes } from 'react';
+import { forwardRef, ButtonHTMLAttributes } from 'react';
 import styles from './Button.module.css';
 
 export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
@@ -8,21 +8,24 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
   className?: string;
 }
 
-export const Button = ({
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
   label,
   variant = 'primary',
   size = 'md',
   className = '',
   type = 'button',
   ...props
-}: ButtonProps) => {
+}, ref) => {
   return (
     <button
+      {...props}
+      ref={ref}
       type={type}
       className={`${styles.button} ${styles[variant]} ${styles[size]} ${className}`}
-      {...props}
     >
       {label}
     </button>
   );
-}; 
+});
+
+Button.displayName = 'Button'; 

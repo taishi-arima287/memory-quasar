@@ -1,35 +1,25 @@
+import { forwardRef, InputHTMLAttributes } from 'react';
 import styles from './Textbox.module.css';
 
-export interface TextboxProps {
-  type?: 'text' | 'password' | 'email';
-  placeholder?: string;
-  value: string;
-  onChange: (value: string) => void;
-  disabled?: boolean;
+export interface TextboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   error?: boolean;
   className?: string;
-  id?: string;
 }
 
-export const Textbox = ({
-  id,
+export const Textbox = forwardRef<HTMLInputElement, TextboxProps>(({
   type = 'text',
-  placeholder,
-  value,
-  onChange,
-  disabled = false,
   error,
   className,
-}: TextboxProps) => {
+  ...props
+}, ref) => {
   return (
     <input
-      id={id}
+      {...props}
+      ref={ref}
       type={type}
       className={`${styles.textbox} ${error ? styles.error : ''} ${className ?? ''}`}
-      placeholder={placeholder}
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      disabled={disabled}
     />
   );
-}; 
+});
+
+Textbox.displayName = 'Textbox'; 
