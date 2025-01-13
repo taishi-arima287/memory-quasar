@@ -22,4 +22,4 @@
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.css"],
   "exclude": ["node_modules"]
-} 
+}

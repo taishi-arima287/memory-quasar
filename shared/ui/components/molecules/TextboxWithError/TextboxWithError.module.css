@@ -5,9 +5,9 @@
 }
 
 .label {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
   color: var(--color-text);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
 }
 
 .inputContainer {
@@ -55,4 +55,4 @@
   .container {
     width: 100%;
   }
-} 
+}

@@ -1,6 +1,6 @@
-import 'next-auth';
+import "next-auth";
 
-declare module 'next-auth' {
+declare module "next-auth" {
   interface User {
     accessToken?: string;
   }
@@ -12,4 +12,4 @@ declare module 'next-auth' {
   interface JWT {
     accessToken?: string;
   }
-} 
+}

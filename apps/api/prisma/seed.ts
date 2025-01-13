@@ -1,27 +1,27 @@
-import { PrismaClient } from '@prisma/client'
-import * as bcrypt from 'bcrypt'
+import { PrismaClient } from "@prisma/client";
+import * as bcrypt from "bcrypt";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 async function main() {
-  const hashedPassword = await bcrypt.hash('admin123', 10)
-  
+  const hashedPassword = await bcrypt.hash("admin123", 10);
+
   await prisma.user.upsert({
-    where: { email: 'admin@example.com' },
+    where: { email: "admin@example.com" },
     update: {},
     create: {
-      email: 'admin@example.com',
-      name: 'Admin User',
+      email: "admin@example.com",
+      name: "Admin User",
       password: hashedPassword,
     },
-  })
+  });
 }
 
 main()
   .catch((e) => {
-    console.error(e)
-    process.exit(1)
+    console.error(e);
+    process.exit(1);
   })
   .finally(async () => {
-    await prisma.$disconnect()
-  }) 
+    await prisma.$disconnect();
+  });

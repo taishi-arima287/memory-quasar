@@ -1,9 +1,9 @@
-import type { Preview } from '@storybook/react';
-import '../ui/styles/base.css';
+import type { Preview } from "@storybook/react";
+import "../ui/styles/base.css";
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: '^on[A-Z].*' },
+    actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -13,4 +13,4 @@ const preview: Preview = {
   },
 };
 
-export default preview; 
+export default preview;

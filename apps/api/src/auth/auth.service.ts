@@ -1,8 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import { JwtService } from '@nestjs/jwt';
-import { compare } from 'bcrypt';
-import { LoginDto } from './dto/login.dto';
+import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { PrismaService } from "../prisma/prisma.service";
+import { JwtService } from "@nestjs/jwt";
+import { compare } from "bcrypt";
+import { LoginDto } from "./dto/login.dto";
 
 @Injectable()
 export class AuthService {
@@ -17,13 +17,13 @@ export class AuthService {
     });
 
     if (!user) {
-      throw new UnauthorizedException('メールアドレスまたはパスワードが正しくありません');
+      throw new UnauthorizedException("メールアドレスまたはパスワードが正しくありません");
     }
 
     const isPasswordValid = await compare(loginDto.password, user.password);
 
     if (!isPasswordValid) {
-      throw new UnauthorizedException('メールアドレスまたはパスワードが正しくありません');
+      throw new UnauthorizedException("メールアドレスまたはパスワードが正しくありません");
     }
 
     const payload = { sub: user.id, email: user.email };
@@ -37,4 +37,4 @@ export class AuthService {
       },
     };
   }
-} 
+}

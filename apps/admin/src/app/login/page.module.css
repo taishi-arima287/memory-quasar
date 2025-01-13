@@ -10,17 +10,17 @@
   width: 100%;
   max-width: var(--max-width-sm);
   padding: var(--spacing-2xl);
-  background: var(--background);
   border-radius: var(--radius-lg);
+  background: var(--background);
   box-shadow: 0 4px 6px -1px var(--gray-alpha-200);
 }
 
 .title {
   margin-bottom: var(--spacing-xl);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  text-align: center;
   color: var(--foreground);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-lg);
+  text-align: center;
 }
 
 .form {
@@ -37,9 +37,9 @@
 }
 
 .label {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
   color: var(--foreground);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
 }
 
 .button {
@@ -50,4 +50,4 @@
   .card {
     padding: var(--spacing-xl);
   }
-} 
+}
