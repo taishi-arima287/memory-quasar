@@ -14,6 +14,14 @@
     "dev:admin": "npm run dev --workspace=admin",
     "dev:api": "npm run dev --workspace=api",
     "storybook": "npm run storybook --workspace=@memory-quasar/ui",
-    "db:view": "npm run prisma:studio --workspace=api"
+    "db:view": "npm run prisma:studio --workspace=api",
+    "db:migrate": "npm run prisma:migrate --workspace=api",
+    "db:migrate:dev": "npm run prisma:migrate --workspace=api -- --create-only",
+    "db:migrate:prod": "npm run prisma:migrate --workspace=api -- --create-only --schema=./apps/api/src/prisma/schema.prisma",
+    "db:migrate:reset": "npm run prisma:migrate:reset --workspace=api",
+    "db:seed": "npm run prisma:seed --workspace=api",
+    "db:seed:dev": "npm run prisma:seed --workspace=api -- --create-only",
+    "db:seed:prod": "npm run prisma:seed --workspace=api -- --create-only --schema=./apps/api/src/prisma/schema.prisma",
+    "db:studio": "npm run prisma:studio --workspace=api"
   }
 }

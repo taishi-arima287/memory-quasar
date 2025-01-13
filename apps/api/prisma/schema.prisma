@@ -9,12 +9,12 @@ datasource db {
 
 // ここにモデルを定義
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  password  String
-  name      String
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id    String   @id @default(cuid()) @map("user_id") @db.Char(36)
+  email      String   @unique @db.VarChar(255)
+  password   String   @db.VarChar(255)
+  name  String   @map("name") @db.VarChar(100)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("users")
 }
