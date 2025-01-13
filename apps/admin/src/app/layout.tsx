@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "@memory-quasar/ui/ui/styles/base.css";
+import { Providers } from './providers';
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -8,13 +9,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <body>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

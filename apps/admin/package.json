@@ -9,18 +9,22 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
+    "@memory-quasar/ui": "file:../../shared",
     "next": "15.1.4",
+    "next-auth": "^4.24.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@memory-quasar/ui": "file:../../shared"
+    "react-hook-form": "^7.49.3",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.1.4",
-    "@eslint/eslintrc": "^3"
+    "typescript": "^5"
   }
 }
