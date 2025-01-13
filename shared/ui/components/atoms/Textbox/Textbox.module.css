@@ -1,0 +1,24 @@
+.textbox {
+  padding: var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-md);
+  outline: none;
+  transition: var(--transition-default);
+  width: var(--width-full);
+  border-radius: var(--radius-sm);
+  height: var(--height-md);
+}
+
+.textbox:focus {
+  border-color: var(--color-secondary);
+}
+
+.textbox:disabled {
+  background-color: var(--color-disabled);
+  cursor: not-allowed;
+}
+
+.error {
+  border-color: var(--color-error);
+} 

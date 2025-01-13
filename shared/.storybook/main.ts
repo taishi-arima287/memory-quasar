@@ -1,5 +1,4 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
-import type { Configuration } from 'webpack';
 
 const config = {
   stories: ['../ui/components/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -31,12 +30,25 @@ const config = {
   docs: {
     autodocs: true,
   },
-  webpackFinal: async (config: Configuration): Promise<Configuration> => {
-    const rules = config.module?.rules?.filter((rule: any) => {
-      return !(rule.test instanceof RegExp && rule.test.test('.css'));
-    }) || [];
+  webpackFinal: async (config: any) => {
+    // 既存のCSSルールを削除
+    config.module.rules = config.module.rules.filter(
+      (rule: any) => !rule.test?.test?.('.css')
+    );
 
-    rules.push({
+    // グローバルCSSを先に処理
+    config.module.rules.push({
+      test: /\.css$/,
+      exclude: /\.module\.css$/,
+      use: [
+        'style-loader',
+        'css-loader',
+        'postcss-loader',
+      ],
+    });
+
+    // CSSモジュールを後で処理（優先度を上げるため）
+    config.module.rules.push({
       test: /\.module\.css$/,
       use: [
         'style-loader',
@@ -46,21 +58,17 @@ const config = {
             importLoaders: 1,
             modules: {
               auto: true,
-              localIdentName: '[name]__[local]--[hash:base64:5]',
+              localIdentName: '[local]_[hash:base64:5]',
+              exportLocalsConvention: 'camelCase',
             },
           },
         },
+        'postcss-loader',
       ],
     });
 
-    return {
-      ...config,
-      module: {
-        ...config.module,
-        rules,
-      },
-    };
+    return config;
   },
-} satisfies StorybookConfig;
+};
 
 export default config;
