@@ -1,23 +1,21 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { Button, TextboxWithError } from '@memory-quasar/ui';
-import styles from './page.module.css';
-import { useRouter } from 'next/navigation';
-import { signIn } from 'next-auth/react';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Button, TextboxWithError } from "@memory-quasar/ui";
+import styles from "./page.module.css";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 // バリデーションスキーマ
 const loginSchema = z.object({
   email: z
     .string()
-    .min(1, { message: 'メールアドレスを入力してください' })
-    .email({ message: 'メールアドレスの形式が正しくありません' }),
-  password: z
-    .string()
-    .min(8, { message: 'パスワードは8文字以上で入力してください' }),
+    .min(1, { message: "メールアドレスを入力してください" })
+    .email({ message: "メールアドレスの形式が正しくありません" }),
+  password: z.string().min(8, { message: "パスワードは8文字以上で入力してください" }),
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;
@@ -34,8 +32,8 @@ export default function LoginPage() {
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
   });
 
@@ -44,20 +42,20 @@ export default function LoginPage() {
       setIsLoading(true);
       setApiError(null);
 
-      const result = await signIn('credentials', {
+      const result = await signIn("credentials", {
         email: data.email,
         password: data.password,
         redirect: false,
       });
 
       if (result?.error) {
-        setApiError('メールアドレスまたはパスワードが正しくありません');
+        setApiError("メールアドレスまたはパスワードが正しくありません");
         return;
       }
 
-      router.push('/document');
+      router.push("/document");
     } catch {
-      setApiError('予期せぬエラーが発生しました');
+      setApiError("予期せぬエラーが発生しました");
     } finally {
       setIsLoading(false);
     }
@@ -68,16 +66,14 @@ export default function LoginPage() {
       <div className={styles.card}>
         <h1 className={styles.title}>Memory Quasar</h1>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          {apiError && (
-            <p className={styles.errorMessage}>{apiError}</p>
-          )}
+          {apiError && <p className={styles.errorMessage}>{apiError}</p>}
           <TextboxWithError
             label="メールアドレス"
             type="email"
             placeholder="example@example.com"
             error={errors.email?.message}
             size="full"
-            {...register('email', { required: true })}
+            {...register("email", { required: true })}
           />
           <TextboxWithError
             label="パスワード"
@@ -85,11 +81,11 @@ export default function LoginPage() {
             placeholder="••••••••"
             error={errors.password?.message}
             size="full"
-            {...register('password', { required: true })}
+            {...register("password", { required: true })}
           />
           <Button
             type="submit"
-            label={isLoading ? 'ログイン中...' : 'ログイン'}
+            label={isLoading ? "ログイン中..." : "ログイン"}
             size="full"
             disabled={isLoading}
             className={styles.button}
@@ -98,4 +94,4 @@ export default function LoginPage() {
       </div>
     </main>
   );
-} 
+}

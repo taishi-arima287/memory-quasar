@@ -1,40 +1,12 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import { JwtService } from '@nestjs/jwt';
-import { compare } from 'bcrypt';
-import { LoginDto } from './dto/login.dto';
+import { Injectable } from "@nestjs/common";
+import { LoginRequest, LoginOriginResponse } from "./dto/login.dto";
+import { AuthRepository } from "./auth.repository";
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private prisma: PrismaService,
-    private jwtService: JwtService,
-  ) {}
+  constructor(private authRepository: AuthRepository) {}
 
-  async login(loginDto: LoginDto) {
-    const user = await this.prisma.user.findUnique({
-      where: { email: loginDto.email },
-    });
-
-    if (!user) {
-      throw new UnauthorizedException('メールアドレスまたはパスワードが正しくありません');
-    }
-
-    const isPasswordValid = await compare(loginDto.password, user.password);
-
-    if (!isPasswordValid) {
-      throw new UnauthorizedException('メールアドレスまたはパスワードが正しくありません');
-    }
-
-    const payload = { sub: user.id, email: user.email };
-    
-    return {
-      access_token: this.jwtService.sign(payload),
-      user: {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-      },
-    };
+  async login(loginRequest: LoginRequest): Promise<LoginOriginResponse> {
+    return this.authRepository.findUnique(loginRequest);
   }
-} 
+}
