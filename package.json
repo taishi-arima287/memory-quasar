@@ -26,8 +26,9 @@
     "db:seed": "npm run prisma:seed --workspace=api",
     "db:seed:dev": "npm run prisma:seed --workspace=api -- --create-only",
     "db:seed:prod": "npm run prisma:seed --workspace=api -- --create-only --schema=./apps/api/src/prisma/schema.prisma",
-    "db:studio": "npm run prisma:studio --workspace=api",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,css}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,css}\""
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,css}\"",
+    "lint": "eslint \"**/*.{ts,tsx,js,jsx,json,md,css}\"",
+    "lint:fix": "eslint \"**/*.{ts,tsx,js,jsx,json,md,css}\" --fix"
   }
 }
