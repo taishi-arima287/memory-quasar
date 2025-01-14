@@ -13,6 +13,14 @@
   "endOfLine": "lf",
   "embeddedLanguageFormatting": "auto",
   "singleAttributePerLine": false,
-  "plugins": ["prettier-plugin-css-order"],
-  "cssDeclarationSorterOrder": "smacss"
+  "plugins": ["prettier-plugin-css-order", "prettier-plugin-prisma"],
+  "cssDeclarationSorterOrder": "smacss",
+  "overrides": [
+    {
+      "files": "*.prisma",
+      "options": {
+        "parser": "prisma"
+      }
+    }
+  ]
 }
