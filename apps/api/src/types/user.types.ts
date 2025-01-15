@@ -14,6 +14,6 @@ export const USER_CONSTANTS = {
 
 // バリデーション用の正規表現
 export const USER_VALIDATION_PATTERNS = {
-  CUID: /^c[a-z0-9]+$/,
+  CUID: /^[a-z0-9]+$/,
   EMAIL: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
 } as const;

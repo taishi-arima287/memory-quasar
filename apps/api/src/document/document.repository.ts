@@ -1,5 +1,5 @@
 import { Injectable, InternalServerErrorException } from "@nestjs/common";
-import { PrismaService } from "../prisma/prisma.service";
+import { PrismaService } from "@/prisma/prisma.service";
 import { GetDocumentListRequest } from "./dto/get-documentList.dto";
 import { GetDocumentRequest } from "./dto/get-document.dto";
 import { Document } from "@prisma/client";

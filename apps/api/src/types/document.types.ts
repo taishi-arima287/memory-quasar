@@ -18,5 +18,5 @@ export const DOCUMENT_CONSTANTS = {
 
 // バリデーション用の正規表現
 export const VALIDATION_PATTERNS = {
-  CUID: /^c[a-z0-9]+$/,
+  CUID: /^[a-z0-9]+$/,
 } as const;

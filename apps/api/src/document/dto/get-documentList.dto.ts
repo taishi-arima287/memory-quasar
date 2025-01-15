@@ -1,8 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { MaxLength, Matches } from "class-validator";
 import { DocumentVisibility } from "@prisma/client";
+import { VALIDATION_PATTERNS, DOCUMENT_CONSTANTS } from "@/types/document.types";
 import { Transform } from "class-transformer";
-import { VALIDATION_PATTERNS, DOCUMENT_CONSTANTS } from "../../types";
 
 export class GetDocumentListRequest {
   @ApiProperty({
@@ -19,8 +19,8 @@ export class GetDocumentListRequest {
     description: "スペースID",
   })
   @Transform(({ value }) => value?.replace(/\s+/g, ""))
-  @MaxLength(36)
-  @Matches(/^c[a-z0-9]+$/)
+  @MaxLength(DOCUMENT_CONSTANTS.MAX_ID_LENGTH)
+  @Matches(VALIDATION_PATTERNS.CUID)
   spaceId!: string;
 }
 

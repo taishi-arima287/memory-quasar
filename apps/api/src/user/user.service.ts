@@ -7,7 +7,7 @@ export class UserService {
   constructor(private userRepository: UserRepository) {}
 
   async getUser(getUserRequest: GetUserRequest): Promise<GetUserResponse> {
-    const user = await this.userRepository.findById(getUserRequest);
+    const user = await this.userRepository.getUser(getUserRequest);
 
     if (!user) {
       throw new NotFoundException("ユーザーが存在しません");
