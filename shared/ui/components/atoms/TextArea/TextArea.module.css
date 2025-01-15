@@ -1,19 +1,20 @@
-.textbox {
+.textarea {
   width: var(--width-full);
-  height: var(--height-md);
   padding: var(--spacing-sm);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   outline: none;
-  font-size: var(--font-size-md);
-  transition: var(--transition-default);
+  font-size: var(--font-size-base);
+  resize: vertical;
+  resize: none;
 }
 
-.textbox:focus {
+.textarea:focus {
   border-color: var(--color-secondary);
+  outline: none;
 }
 
-.textbox:disabled {
+.textarea:disabled {
   background-color: var(--color-disabled);
   cursor: not-allowed;
 }
