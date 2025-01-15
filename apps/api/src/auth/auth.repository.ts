@@ -1,5 +1,5 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
-import { PrismaService } from "../prisma/prisma.service";
+import { PrismaService } from "@/prisma/prisma.service";
 import { JwtService } from "@nestjs/jwt";
 import { compare } from "bcrypt";
 import { LoginRequest, LoginOriginResponse } from "./dto/login.dto";
@@ -11,7 +11,7 @@ export class AuthRepository {
     private jwtService: JwtService,
   ) {}
 
-  async findUnique(loginRequest: LoginRequest): Promise<LoginOriginResponse> {
+  async login(loginRequest: LoginRequest): Promise<LoginOriginResponse> {
     const user = await this.prisma.user.findUnique({
       where: { email: loginRequest.email },
     });

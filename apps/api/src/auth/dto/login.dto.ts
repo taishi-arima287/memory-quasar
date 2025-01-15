@@ -1,11 +1,13 @@
-import { IsEmail, IsString, MinLength } from "class-validator";
+import { IsEmail, IsString, MinLength, MaxLength, Matches } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
+import { User, USER_CONSTANTS, USER_VALIDATION_PATTERNS } from "@/types/user.types";
+import { AUTH_CONSTANTS, AUTH_VALIDATION_PATTERNS } from "@/types/auth.types";
 
-type LoginUser = {
-  id: string;
-  email: string;
-  name: string;
-};
+export class LoginUser implements User {
+  id!: string;
+  email!: string;
+  name!: string;
+}
 
 export class LoginRequest {
   @ApiProperty({
@@ -13,6 +15,8 @@ export class LoginRequest {
     description: "ログイン用メールアドレス",
   })
   @IsEmail()
+  @MaxLength(USER_CONSTANTS.MAX_EMAIL_LENGTH)
+  @Matches(USER_VALIDATION_PATTERNS.EMAIL)
   email!: string;
 
   @ApiProperty({
@@ -20,7 +24,9 @@ export class LoginRequest {
     description: "ログイン用パスワード（8文字以上）",
   })
   @IsString()
-  @MinLength(8)
+  @MinLength(AUTH_CONSTANTS.MIN_PASSWORD_LENGTH)
+  @MaxLength(AUTH_CONSTANTS.MAX_PASSWORD_LENGTH)
+  @Matches(AUTH_VALIDATION_PATTERNS.PASSWORD)
   password!: string;
 }
 

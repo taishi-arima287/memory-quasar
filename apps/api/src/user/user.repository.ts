@@ -1,12 +1,12 @@
 import { Injectable, InternalServerErrorException } from "@nestjs/common";
-import { PrismaService } from "../prisma/prisma.service";
-import { GetUserRequest, User } from "./dto/user.dto";
-
+import { PrismaService } from "@/prisma/prisma.service";
+import { GetUserRequest } from "./dto/get-user.dto";
+import { User } from "@/types/user.types";
 @Injectable()
 export class UserRepository {
   constructor(private prisma: PrismaService) {}
 
-  async findById(getUserRequest: GetUserRequest): Promise<User | null> {
+  async getUser(getUserRequest: GetUserRequest): Promise<User | null> {
     try {
       return await this.prisma.user.findUnique({
         where: { id: getUserRequest.id },

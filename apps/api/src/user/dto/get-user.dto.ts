@@ -1,12 +1,27 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { MaxLength, Matches } from "class-validator";
+import { User, USER_CONSTANTS, USER_VALIDATION_PATTERNS } from "@/types/user.types";
+import { Transform } from "class-transformer";
 
-export class GetUserDto {
+export class GetUserRequest {
   @ApiProperty({
-    example: "ckv9ydh6s0000gkpj1wybug0x",
+    example: "clrjl0mlw0001gkpj1wybug0x",
     description: "ユーザーID",
   })
-  @MaxLength(36)
-  @Matches(/^c[a-z0-9]+$/)
+  @Transform(({ value }) => value?.replace(/\s+/g, ""))
+  @MaxLength(USER_CONSTANTS.MAX_ID_LENGTH)
+  @Matches(USER_VALIDATION_PATTERNS.CUID)
   id!: string;
+}
+
+export class GetUserResponse {
+  @ApiProperty({
+    example: {
+      id: "clrjl0mlw0001gkpj1wybug0x",
+      email: "user@example.com",
+      name: "John Doe",
+    },
+    description: "ユーザー情報",
+  })
+  user!: User;
 }

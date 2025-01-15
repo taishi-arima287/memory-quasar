@@ -7,6 +7,6 @@ export class AuthService {
   constructor(private authRepository: AuthRepository) {}
 
   async login(loginRequest: LoginRequest): Promise<LoginOriginResponse> {
-    return this.authRepository.findUnique(loginRequest);
+    return this.authRepository.login(loginRequest);
   }
 }
