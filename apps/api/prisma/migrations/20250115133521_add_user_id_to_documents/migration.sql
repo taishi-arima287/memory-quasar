@@ -28,6 +28,7 @@ CREATE TABLE "spaces" (
 -- CreateTable
 CREATE TABLE "documents" (
     "id" CHAR(36) NOT NULL,
+    "user_id" CHAR(36) NOT NULL,
     "space_id" CHAR(36),
     "title" VARCHAR(100) NOT NULL,
     "content" TEXT NOT NULL,
@@ -45,10 +46,13 @@ CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 CREATE UNIQUE INDEX "documents_title_key" ON "documents"("title");
 
 -- CreateIndex
-CREATE INDEX "documents_space_id_idx" ON "documents"("space_id");
+CREATE INDEX "documents_space_id_visibility_idx" ON "documents"("space_id", "visibility");
 
 -- AddForeignKey
 ALTER TABLE "users" ADD CONSTRAINT "users_space_id_fkey" FOREIGN KEY ("space_id") REFERENCES "spaces"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "documents" ADD CONSTRAINT "documents_space_id_fkey" FOREIGN KEY ("space_id") REFERENCES "spaces"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "documents" ADD CONSTRAINT "documents_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
