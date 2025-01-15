@@ -1,7 +1,7 @@
 import { Controller, Get, Param } from "@nestjs/common";
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiExtraModels } from "@nestjs/swagger";
 import { UserService } from "./user.service";
-import { GetUserRequest, GetUserResponse } from "./dto/user.dto";
+import { GetUserRequest, GetUserResponse } from "./dto/get-user.dto";
 
 @ApiTags("users")
 @ApiExtraModels(GetUserRequest)

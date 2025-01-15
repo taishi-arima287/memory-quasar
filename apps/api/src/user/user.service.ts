@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { GetUserRequest, GetUserResponse } from "./dto/user.dto";
+import { GetUserRequest, GetUserResponse } from "./dto/get-user.dto";
 import { UserRepository } from "./user.repository";
 
 @Injectable()
