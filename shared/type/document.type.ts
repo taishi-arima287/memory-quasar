@@ -11,6 +11,7 @@ export type Document = {
   visibility: DocumentVisibility;
   userId: string;
   spaceId: string | null;
+  userName: string;
   createdAt: string;
   updatedAt: string;
 };

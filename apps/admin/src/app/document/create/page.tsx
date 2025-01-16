@@ -4,6 +4,8 @@ import { Button, TextboxWithError, MarkdownEditor } from "@memory-quasar/shared/
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { DocumentVisibility } from "@memory-quasar/shared/type";
+import { useSession } from "next-auth/react";
 
 const documentSchema = z.object({
   title: z.string().min(1, { message: "ドキュメントタイトルを入力してください" }).nullable(),
@@ -22,8 +24,22 @@ export default function DocumentCreatePage() {
     resolver: zodResolver(documentSchema),
   });
 
-  const onSubmit = (data: DocumentFormData) => {
-    console.log(data);
+  const { data: session } = useSession();
+
+  const onSubmit = async (data: DocumentFormData) => {
+    fetch("http://localhost:8080/documents", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...data,
+        visibility: DocumentVisibility.PUBLIC,
+        userName: session?.user?.name,
+        userId: session?.user?.id,
+        spaceId: session?.user?.spaceId,
+      }),
+    });
   };
 
   return (
@@ -40,7 +56,7 @@ export default function DocumentCreatePage() {
           label="ドキュメント内容"
           className={styles.markdownEditor}
           {...register("content")}
-          onChange={(value) => {
+          onChange={(value: string) => {
             setValue("content", value);
           }}
         />

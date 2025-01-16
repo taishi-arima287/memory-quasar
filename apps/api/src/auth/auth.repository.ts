@@ -34,6 +34,7 @@ export class AuthRepository {
         id: user.id,
         email: user.email,
         name: user.name,
+        spaceId: user.spaceId ?? "",
       },
     };
   }
