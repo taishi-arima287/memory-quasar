@@ -1,6 +1,6 @@
 "use client";
 import styles from "./page.module.css";
-import { Button, TextboxWithError, MarkdownEditor } from "@memory-quasar/ui";
+import { Button, TextboxWithError, MarkdownEditor } from "@memory-quasar/shared/ui";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";

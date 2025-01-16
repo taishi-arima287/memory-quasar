@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
-    "@memory-quasar/ui": "file:../../shared",
+    "@memory-quasar/shared": "file:../../shared",
     "next": "15.1.4",
     "next-auth": "^4.24.11",
     "react": "^18.2.0",
