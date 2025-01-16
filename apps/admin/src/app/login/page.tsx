@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button, TextboxWithError } from "@memory-quasar/ui";
+import { Button, TextboxWithError } from "@memory-quasar/shared/ui";
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";

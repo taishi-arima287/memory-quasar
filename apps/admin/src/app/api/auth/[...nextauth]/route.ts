@@ -28,6 +28,7 @@ const handler = NextAuth({
               id: data.user.id,
               email: data.user.email,
               name: data.user.name,
+              spaceId: data.user.spaceId,
               accessToken: data.access_token,
             };
           }
@@ -42,10 +43,16 @@ const handler = NextAuth({
     async jwt({ token, user }) {
       if (user) {
         token.accessToken = user.accessToken;
+        token.spaceId = user.spaceId;
+        token.id = user.id;
       }
       return token;
     },
     async session({ session, token }) {
+      if (session.user) {
+        session.user.spaceId = token.spaceId as string | undefined;
+        session.user.id = token.id as string;
+      }
       session.accessToken = token.accessToken as string | undefined;
       return session;
     },

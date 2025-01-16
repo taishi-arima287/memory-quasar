@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "@memory-quasar/ui": ["../../shared/ui"],
+      "@memory-quasar/shared": ["../../shared"],
+      "@memory-quasar/shared/*": ["../../shared/*"],
       "@/*": ["./src/*"]
     }
   },

@@ -1,5 +1,7 @@
+"use client";
 import { forwardRef } from "react";
-import SimpleMDE, { SimpleMDEReactProps } from "react-simplemde-editor";
+import dynamic from "next/dynamic";
+import type { SimpleMDEReactProps } from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import styles from "./MarkdownEditor.module.css";
 
@@ -8,6 +10,8 @@ export interface MarkdownEditorProps extends SimpleMDEReactProps {
   className?: string;
   id?: string;
 }
+
+const SimpleMDE = dynamic(() => import("react-simplemde-editor"), { ssr: false });
 
 export const MarkdownEditor = forwardRef<HTMLDivElement, MarkdownEditorProps>(
   ({ label, className = "", id, ...props }, ref) => {

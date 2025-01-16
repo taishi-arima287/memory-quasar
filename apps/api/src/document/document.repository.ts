@@ -40,6 +40,7 @@ export class DocumentRepository {
           visibility: postDocumentRequest.visibility,
           spaceId: postDocumentRequest.spaceId,
           userId: postDocumentRequest.userId,
+          userName: postDocumentRequest.userName,
         },
       });
     } catch (error) {

@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["@memory-quasar/ui"],
+  transpilePackages: ["@memory-quasar/shared"],
   experimental: {
     externalDir: true,
   },

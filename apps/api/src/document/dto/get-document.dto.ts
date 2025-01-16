@@ -32,6 +32,11 @@ export class GetDocumentResponse {
       id: "ckv9ydh6s0000gkpj1wybug0x",
       title: "ドキュメントタイトル",
       content: "ドキュメント内容",
+      userName: "ユーザー名",
+      spaceId: "ckv9ydh6s0000gkpj1wybug0x",
+      userId: "ckv9ydh6s0000gkpj1wybug0x",
+      visibility: DocumentVisibility.PUBLIC,
+      createdAt: "2025-01-01T00:00:00.000Z",
     },
     description: "ドキュメント情報",
   })

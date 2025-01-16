@@ -18,7 +18,7 @@
     "dev:web": "npm run dev --workspace=web",
     "dev:admin": "npm run dev --workspace=admin",
     "dev:api": "npm run dev --workspace=api",
-    "storybook": "npm run storybook --workspace=@memory-quasar/ui",
+    "storybook": "npm run storybook --workspace=@memory-quasar/shared",
     "db:view": "npm run prisma:studio --workspace=api",
     "db:migrate": "npm run prisma:migrate --workspace=api",
     "db:migrate:dev": "npm run prisma:migrate --workspace=api -- --create-only",

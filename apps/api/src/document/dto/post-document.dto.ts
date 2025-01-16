@@ -34,6 +34,13 @@ export class PostDocumentRequest {
   visibility!: DocumentVisibility;
 
   @ApiProperty({
+    example: "ユーザー名",
+    description: "ユーザー名",
+  })
+  @IsNotEmpty()
+  userName!: string;
+
+  @ApiProperty({
     example: "ckv9ydh6s0000gkpj1wybug0x",
     description: "スペースID",
   })

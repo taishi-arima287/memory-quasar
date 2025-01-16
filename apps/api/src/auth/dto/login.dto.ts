@@ -7,6 +7,7 @@ export class LoginUser implements User {
   id!: string;
   email!: string;
   name!: string;
+  spaceId!: string;
 }
 
 export class LoginRequest {
@@ -36,6 +37,7 @@ export class LoginResponse {
       id: "ckv9ydh6s0000gkpj1wybug0x",
       email: "user@example.com",
       name: "John Doe",
+      spaceId: "ckv9ydh6s0000gkpj1wybug0x",
     },
     description: "ユーザー情報",
   })

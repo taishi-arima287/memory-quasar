@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "@memory-quasar/ui/ui/styles/base.css";
+import "@memory-quasar/shared/ui/styles/base.css";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {

@@ -1,11 +1,16 @@
 {
-  "name": "@memory-quasar/ui",
+  "name": "@memory-quasar/shared",
   "version": "0.1.0",
   "private": true,
-  "main": "ui/index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./ui": "./ui/index.ts",
+    "./type": "./type/index.ts"
+  },
   "files": [
     "ui/**/*",
-    "styles/**/*"
+    "styles/**/*",
+    "type/**/*"
   ],
   "scripts": {
     "build": "tsc",
