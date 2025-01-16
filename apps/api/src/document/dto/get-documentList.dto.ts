@@ -32,6 +32,7 @@ export class GetDocumentListResponse {
         title: "ドキュメントのタイトル",
         content: "ドキュメントの内容",
         visibility: DocumentVisibility.PUBLIC,
+        userName: "ユーザー名",
         userId: "clrjl0mlw0001gkpj1wybug0x",
         spaceId: "clrjl0mlw0002gkpj1wybug0x",
       },
