@@ -2,6 +2,7 @@ import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 import { ValidationPipe } from "@nestjs/common";
+import cookieParser from "cookie-parser";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -10,7 +11,10 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   // CORSを有効化
-  app.enableCors();
+  app.enableCors({
+    origin: "http://localhost:8000",
+    credentials: true,
+  });
 
   // Swagger設定
   const config = new DocumentBuilder()
@@ -23,6 +27,8 @@ async function bootstrap() {
 
   // 環境変数からポート番号を取得（デフォルト: 8080）
   const port = process.env.PORT || 8080;
+
+  app.use(cookieParser());
 
   await app.listen(port);
   console.log(`Application is running on: http://localhost:${port}`);

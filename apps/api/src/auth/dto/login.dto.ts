@@ -42,6 +42,12 @@ export class LoginResponse {
     description: "ユーザー情報",
   })
   user!: LoginUser;
+
+  @ApiProperty({
+    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    description: "JWTアクセストークン",
+  })
+  access_token!: string;
 }
 
 export class LoginOriginResponse extends LoginResponse {
