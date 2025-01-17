@@ -1,10 +1,19 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { cookies } from "next/headers";
 
 const handler = NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/login",
+  },
+  session: {
+    strategy: "jwt",
+    maxAge: 24 * 60 * 60,
+    updateAge: 24 * 60 * 60,
+  },
+  jwt: {
+    maxAge: 24 * 60 * 60,
   },
   providers: [
     CredentialsProvider({
@@ -24,12 +33,20 @@ const handler = NextAuth({
           const data = await res.json();
 
           if (res.ok && data) {
+            const cookieStore = await cookies();
+            cookieStore.set("access_token", data.access_token, {
+              httpOnly: true,
+              secure: process.env.NODE_ENV === "production",
+              sameSite: "lax",
+              path: "/",
+              maxAge: 24 * 60 * 60,
+            });
+
             return {
               id: data.user.id,
               email: data.user.email,
               name: data.user.name,
               spaceId: data.user.spaceId,
-              accessToken: data.access_token,
             };
           }
           return null;
@@ -42,7 +59,6 @@ const handler = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.accessToken = user.accessToken;
         token.spaceId = user.spaceId;
         token.id = user.id;
       }
@@ -53,7 +69,6 @@ const handler = NextAuth({
         session.user.spaceId = token.spaceId as string | undefined;
         session.user.id = token.id as string;
       }
-      session.accessToken = token.accessToken as string | undefined;
       return session;
     },
   },

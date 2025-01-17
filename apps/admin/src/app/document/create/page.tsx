@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { DocumentVisibility } from "@memory-quasar/shared/type";
 import { useSession } from "next-auth/react";
-
+import { fetcher } from "@/repository/fetcher";
 const documentSchema = z.object({
   title: z.string().min(1, { message: "ドキュメントタイトルを入力してください" }).nullable(),
   content: z.string().nullable(),
@@ -27,18 +27,16 @@ export default function DocumentCreatePage() {
   const { data: session } = useSession();
 
   const onSubmit = async (data: DocumentFormData) => {
-    fetch("http://localhost:8080/documents", {
+    fetcher({
+      uri: "/documents",
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+      body: {
         ...data,
         visibility: DocumentVisibility.PUBLIC,
         userName: session?.user?.name,
         userId: session?.user?.id,
         spaceId: session?.user?.spaceId,
-      }),
+      },
     });
   };
 

@@ -7,6 +7,10 @@ const nextConfig = {
     };
     return config;
   },
+  transpilePackages: ["@memory-quasar/shared"],
+  experimental: {
+    externalDir: true,
+  },
 };
 
 module.exports = nextConfig;

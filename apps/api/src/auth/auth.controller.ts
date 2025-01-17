@@ -4,7 +4,7 @@ import { LoginRequest, LoginResponse } from "./dto/login.dto";
 import { ApiTags, ApiOperation, ApiResponse } from "@nestjs/swagger";
 import { Response } from "express";
 
-type LoginPublicResponse = Omit<LoginResponse, "access_token">;
+type LoginPublicResponse = LoginResponse;
 
 @ApiTags("auth")
 @Controller("auth")
@@ -32,6 +32,6 @@ export class AuthController {
       maxAge: 24 * 60 * 60 * 1000,
     });
 
-    return { user: result.user };
+    return { user: result.user, access_token: result.access_token };
   }
 }
