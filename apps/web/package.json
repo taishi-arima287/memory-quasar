@@ -9,29 +9,22 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
     "@memory-quasar/shared": "file:../../shared",
-    "@tanstack/react-query": "^5.0.0",
-    "jwt-decode": "^4.0.0",
     "next": "15.1.4",
+    "next-auth": "^4.24.11",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.49.3",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@testing-library/jest-dom": "^6.0.0",
-    "@testing-library/react": "^14.0.0",
-    "@types/dompurify": "^3.0.5",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "@typescript-eslint/eslint-plugin": "^7.0.0",
-    "@typescript-eslint/parser": "^7.0.0",
-    "cypress": "^13.6.0",
-    "eslint": "^8.56.0",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
     "eslint-config-next": "15.1.4",
-    "eslint-config-prettier": "^9.0.0",
-    "jest": "^29.7.0",
-    "prettier": "^3.2.0",
     "typescript": "^5"
   }
 }
