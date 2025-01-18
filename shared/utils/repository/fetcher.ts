@@ -12,6 +12,13 @@ interface FetcherResponse<T> {
   error?: string;
 }
 
+export class FetcherError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "FetcherError";
+  }
+}
+
 export async function fetcher<Response, Request = undefined>({
   uri,
   method,
@@ -37,9 +44,6 @@ export async function fetcher<Response, Request = undefined>({
       error: !response.ok ? data.message : undefined,
     };
   } catch (error) {
-    return {
-      ok: false,
-      error: (error as Error).message,
-    };
+    throw new Error(error instanceof Error ? error.message : "通信エラーが発生しました");
   }
 }

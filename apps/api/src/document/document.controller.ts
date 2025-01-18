@@ -6,9 +6,9 @@ import { GetDocumentListRequest, GetDocumentListResponse } from "./dto/get-docum
 import { PostDocumentRequest, PostDocumentResponse } from "./dto/post-document.dto";
 import { AuthGuard } from "@/auth/guards/auth.guard";
 
-@ApiTags("documents")
+@ApiTags("document")
 @ApiExtraModels(GetDocumentRequest)
-@Controller("documents")
+@Controller("document")
 @UseGuards(AuthGuard)
 export class DocumentController {
   constructor(private readonly documentService: DocumentService) {}
