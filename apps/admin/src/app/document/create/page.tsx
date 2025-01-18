@@ -4,9 +4,9 @@ import { Button, TextboxWithError, MarkdownEditor } from "@memory-quasar/shared/
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { DocumentVisibility } from "@memory-quasar/shared/type";
+import { DocumentVisibility } from "@memory-quasar/shared/utils/repository/document/type";
 import { useSession } from "next-auth/react";
-import { fetcher } from "@/repository/fetcher";
+import { fetcher } from "@memory-quasar/shared/utils/repository/fetcher";
 const documentSchema = z.object({
   title: z.string().min(1, { message: "ドキュメントタイトルを入力してください" }).nullable(),
   content: z.string().nullable(),

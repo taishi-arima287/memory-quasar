@@ -1,6 +1,8 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { cookies } from "next/headers";
+import { fetcher } from "@memory-quasar/shared/utils/repository/fetcher";
+import { LoginRequest, LoginResponse } from "@memory-quasar/shared/utils/repository/login/type";
 
 const handler = NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
@@ -24,15 +26,15 @@ const handler = NextAuth({
       },
       async authorize(credentials) {
         try {
-          const res = await fetch("http://localhost:8080/auth/login", {
+          const res = await fetcher<LoginResponse, LoginRequest>({
+            uri: "/auth/login",
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(credentials),
+            body: credentials,
           });
 
-          const data = await res.json();
+          const data = res.data;
 
-          if (res.ok && data) {
+          if (res.ok && data?.access_token && data?.user) {
             const cookieStore = await cookies();
             cookieStore.set("access_token", data.access_token, {
               httpOnly: true,

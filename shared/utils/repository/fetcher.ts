@@ -4,14 +4,19 @@ interface FetcherOptions<Request> {
   uri: string;
   method: HttpMethod;
   body?: Request;
-  token?: string;
+}
+
+interface FetcherResponse<T> {
+  ok: boolean;
+  data?: T;
+  error?: string;
 }
 
 export async function fetcher<Response, Request = undefined>({
   uri,
   method,
   body,
-}: FetcherOptions<Request>): Promise<Response> {
+}: FetcherOptions<Request>): Promise<FetcherResponse<Response>> {
   const headers: HeadersInit = {
     "Content-Type": "application/json",
   };
@@ -23,8 +28,18 @@ export async function fetcher<Response, Request = undefined>({
       ...(body && { body: JSON.stringify(body) }),
       credentials: "include",
     });
-    return response.json();
+
+    const data = await response.json();
+
+    return {
+      ok: response.ok,
+      data: response.ok ? data : undefined,
+      error: !response.ok ? data.message : undefined,
+    };
   } catch (error) {
-    throw new Error(error as string);
+    return {
+      ok: false,
+      error: (error as Error).message,
+    };
   }
 }
