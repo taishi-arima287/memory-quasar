@@ -20,3 +20,12 @@ export type DocumentFormData = {
   title: string;
   content: string;
 };
+
+export type PostDocumentRequest = {
+  title: string;
+  content: string;
+};
+
+export type PostDocumentResponse = {
+  id: string;
+};

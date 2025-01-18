@@ -43,12 +43,17 @@ export default function DocumentCreatePage() {
       });
 
       if (!result.ok) {
-        throw result.error || "エラーが発生しました";
+        router.push(
+          `/error-page?message=${encodeURIComponent(result.error || "")}&returnPath=${encodeURIComponent("/document/create")}`,
+        );
+        return;
       }
 
       router.push("/document");
-    } catch (error) {
-      throw error;
+    } catch (error: unknown) {
+      router.push(
+        `/error-page?message=${encodeURIComponent(error instanceof Error ? error.message : "予期せぬエラーが発生しました")}&returnPath=${encodeURIComponent("/document/create")}`,
+      );
     }
   };
 

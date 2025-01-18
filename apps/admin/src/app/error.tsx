@@ -13,6 +13,7 @@ export default function Error({ error }: { error: Error & { digest?: string } })
   return (
     <div>
       <h2>エラーが発生しました</h2>
+      <p>{error.message}</p>
       <button onClick={() => router.push("/")}>ホームに戻る</button>
     </div>
   );
