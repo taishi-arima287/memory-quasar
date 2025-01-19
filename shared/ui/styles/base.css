@@ -54,6 +54,7 @@ textarea {
   --color-text: #333333;
   --color-text-light: #666666;
   --color-background: #ffffff;
+  --color-link: #0070f3;
 
   /* Font Sizes */
   --font-size-sm: 14px;
@@ -109,9 +110,10 @@ textarea {
   --height-xs: 24px;
   --height-sm: 32px;
   --height-md: 40px;
-  --height-lg: 48px;
-  --height-xl: 56px;
-  --height-2xl: 64px;
+  --height-lg: 160px;
+  --height-xl: 240px;
+  --height-2xl: 320px;
+  --height-3xl: 400px;
   --height-full: 100%;
   --height-screen: 100vh;
   --height-screen-safe: 100svh;
@@ -121,9 +123,9 @@ textarea {
   --min-height-xs: 24px;
   --min-height-sm: 32px;
   --min-height-md: 40px;
-  --min-height-lg: 48px;
-  --min-height-xl: 56px;
-  --min-height-2xl: 64px;
+  --min-height-lg: 160px;
+  --min-height-xl: 240px;
+  --min-height-2xl: 320px;
   --min-height-full: 100%;
   --min-height-screen: 100vh;
   --min-height-screen-safe: 100svh;
@@ -132,10 +134,14 @@ textarea {
   --max-height-xs: 24px;
   --max-height-sm: 32px;
   --max-height-md: 40px;
-  --max-height-lg: 48px;
-  --max-height-xl: 56px;
-  --max-height-2xl: 64px;
+  --max-height-lg: 160px;
+  --max-height-xl: 240px;
+  --max-height-2xl: 320px;
   --max-height-full: 100%;
   --max-height-screen: 100vh;
   --max-height-screen-safe: 100svh;
+
+  /* Background */
+  --background-primary: #ffffff;
+  --background-not-image: #555555;
 }
