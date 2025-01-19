@@ -48,6 +48,7 @@ model Document {
   content    String             @db.Text
   visibility DocumentVisibility @default(PRIVATE)
   userName   String             @map("user_name") @db.VarChar(100)
+  thumbnail  String?            @map("thumbnail") @db.VarChar(255)
   createdAt  DateTime           @default(now()) @map("created_at")
   updatedAt  DateTime           @updatedAt @map("updated_at")
   space      Space?             @relation(fields: [spaceId], references: [id])

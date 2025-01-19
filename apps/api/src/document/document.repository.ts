@@ -47,6 +47,7 @@ export class DocumentRepository {
           spaceId: postDocumentRequest.spaceId,
           userId: postDocumentRequest.userId,
           userName: postDocumentRequest.userName,
+          thumbnail: postDocumentRequest.thumbnail,
         },
       });
     } catch (error) {

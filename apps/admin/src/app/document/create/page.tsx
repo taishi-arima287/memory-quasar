@@ -35,6 +35,7 @@ export default function DocumentCreatePage() {
         method: "POST",
         body: {
           ...data,
+          thumbnail: "",
           visibility: DocumentVisibility.PUBLIC,
           userName: session?.user?.name,
           userId: session?.user?.id,
