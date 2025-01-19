@@ -12,6 +12,7 @@ export type Document = {
   userId: string;
   spaceId: string | null;
   userName: string;
+  thumbnail: string | null;
   createdAt: string;
   updatedAt: string;
 };

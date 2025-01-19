@@ -1,10 +1,12 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Link from "next/link";
+import Image from "next/image";
 import { GetDocumentListResponse } from "@memory-quasar/shared/utils/repository/document/type";
 import { serverFetcher } from "@memory-quasar/shared/utils/repository/serverFetcher";
-
+import styles from "./page.module.css";
 async function getDocuments(userId: string, spaceId: string): Promise<GetDocumentListResponse> {
+  "use server";
   try {
     const result = await serverFetcher<GetDocumentListResponse>({
       uri: `/document?userId=${userId}&spaceId=${spaceId}`,
@@ -33,17 +35,24 @@ export default async function DocumentPage() {
 
   return (
     <main>
-      <div>
+      <div className={styles.header}>
         <h1>ドキュメント一覧</h1>
         <Link href="./document/create" role="button" aria-label="ドキュメントを新規作成">
           ドキュメント新規作成
         </Link>
       </div>
-      <ul>
-        {documents.documents.map((doc) => (
-          <li key={doc.id}>
-            <p>{doc.title}</p>
-            <Link href={`/document/${doc.id}`}>詳細</Link>
+      <ul className={styles.documentList}>
+        {documents.documents.map((document) => (
+          <li key={document.id} className={styles.documentItem}>
+            <div className={styles.thumbnailContainer}>
+              {document.thumbnail && (
+                <Image src={document.thumbnail} width={320} height={200} alt={document.title} />
+              )}
+            </div>
+            <div className={styles.documentContent}>
+              <p className={styles.documentTitle}>{document.title}</p>
+              <Link href={`/document/${document.id}`}>詳細</Link>
+            </div>
           </li>
         ))}
       </ul>
