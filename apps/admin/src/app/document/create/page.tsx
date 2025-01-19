@@ -4,9 +4,10 @@ import { Button, TextboxWithError, MarkdownEditor } from "@memory-quasar/shared/
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { DocumentVisibility } from "@memory-quasar/shared/type";
+import { DocumentVisibility } from "@memory-quasar/shared/utils/repository/document/type";
 import { useSession } from "next-auth/react";
-import { fetcher } from "@/repository/fetcher";
+import { fetcher } from "@memory-quasar/shared/utils/repository/fetcher";
+import { useRouter } from "next/navigation";
 const documentSchema = z.object({
   title: z.string().min(1, { message: "ドキュメントタイトルを入力してください" }).nullable(),
   content: z.string().nullable(),
@@ -17,7 +18,7 @@ type DocumentFormData = z.infer<typeof documentSchema>;
 export default function DocumentCreatePage() {
   const {
     register,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
     setValue,
   } = useForm<DocumentFormData>({
@@ -25,19 +26,35 @@ export default function DocumentCreatePage() {
   });
 
   const { data: session } = useSession();
+  const router = useRouter();
 
   const onSubmit = async (data: DocumentFormData) => {
-    fetcher({
-      uri: "/documents",
-      method: "POST",
-      body: {
-        ...data,
-        visibility: DocumentVisibility.PUBLIC,
-        userName: session?.user?.name,
-        userId: session?.user?.id,
-        spaceId: session?.user?.spaceId,
-      },
-    });
+    try {
+      const result = await fetcher({
+        uri: "/document",
+        method: "POST",
+        body: {
+          ...data,
+          visibility: DocumentVisibility.PUBLIC,
+          userName: session?.user?.name,
+          userId: session?.user?.id,
+          spaceId: session?.user?.spaceId,
+        },
+      });
+
+      if (!result.ok) {
+        router.push(
+          `/error-page?message=${encodeURIComponent(result.error || "")}&returnPath=${encodeURIComponent("/document/create")}`,
+        );
+        return;
+      }
+
+      router.push("/document");
+    } catch (error: unknown) {
+      router.push(
+        `/error-page?message=${encodeURIComponent(error instanceof Error ? error.message : "予期せぬエラーが発生しました")}&returnPath=${encodeURIComponent("/document/create")}`,
+      );
+    }
   };
 
   return (
@@ -58,7 +75,7 @@ export default function DocumentCreatePage() {
             setValue("content", value);
           }}
         />
-        <Button type="submit" label="ドキュメント作成"></Button>
+        <Button type="submit" label="ドキュメント作成" disabled={!isValid}></Button>
       </form>
     </main>
   );
