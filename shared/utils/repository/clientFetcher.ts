@@ -1,3 +1,4 @@
+// クライアント用
 type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
 
 interface FetcherOptions<Request> {
@@ -19,7 +20,7 @@ export class FetcherError extends Error {
   }
 }
 
-export async function fetcher<Response, Request = undefined>({
+export async function clientFetcher<Response, Request = undefined>({
   uri,
   method,
   body,
@@ -29,11 +30,11 @@ export async function fetcher<Response, Request = undefined>({
   };
 
   try {
-    const response = await fetch(`http://localhost:8080${uri}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${uri}`, {
       method,
       headers,
-      ...(body && { body: JSON.stringify(body) }),
       credentials: "include",
+      ...(body && { body: JSON.stringify(body) }),
     });
 
     const data = await response.json();
@@ -44,6 +45,6 @@ export async function fetcher<Response, Request = undefined>({
       error: !response.ok ? data.message : undefined,
     };
   } catch (error) {
-    throw new Error(error instanceof Error ? error.message : "通信エラーが発生しました");
+    throw new Error(error instanceof Error ? error.message : "予期せぬエラーが発生しました");
   }
 }

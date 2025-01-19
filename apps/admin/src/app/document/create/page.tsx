@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { DocumentVisibility } from "@memory-quasar/shared/utils/repository/document/type";
 import { useSession } from "next-auth/react";
-import { fetcher } from "@memory-quasar/shared/utils/repository/fetcher";
+import { clientFetcher } from "@memory-quasar/shared/utils/repository/clientFetcher";
 import { useRouter } from "next/navigation";
 const documentSchema = z.object({
   title: z.string().min(1, { message: "ドキュメントタイトルを入力してください" }).nullable(),
@@ -30,7 +30,7 @@ export default function DocumentCreatePage() {
 
   const onSubmit = async (data: DocumentFormData) => {
     try {
-      const result = await fetcher({
+      const result = await clientFetcher({
         uri: "/document",
         method: "POST",
         body: {
@@ -48,7 +48,6 @@ export default function DocumentCreatePage() {
         );
         return;
       }
-
       router.push("/document");
     } catch (error: unknown) {
       router.push(

@@ -1,6 +1,7 @@
 declare namespace NodeJS {
   interface ProcessEnv {
-    NEXTAUTH_SECRET: string;
+    JWT_SECRET: string;
+    JWT_EXPIRES_IN: string;
     // ... other env vars
   }
 }

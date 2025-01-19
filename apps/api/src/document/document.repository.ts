@@ -19,13 +19,19 @@ export class DocumentRepository {
 
   async getDocumentList(getDocumentListRequest: GetDocumentListRequest): Promise<Document[]> {
     try {
-      const [publicDocs, spaceDocs, privateDocs] = await Promise.all([
-        this.getPublicDocuments(),
-        this.getSpaceDocuments(getDocumentListRequest.spaceId),
-        this.getPrivateDocuments(getDocumentListRequest.userId),
-      ]);
-
-      return [...publicDocs, ...spaceDocs, ...privateDocs].sort((a, b) => a.id.localeCompare(b.id));
+      const docs = await this.prisma.document.findMany({
+        where: {
+          OR: [
+            { visibility: "PUBLIC" },
+            { AND: [{ spaceId: getDocumentListRequest.spaceId }, { visibility: "SPACE" }] },
+            {
+              AND: [{ userId: getDocumentListRequest.userId }, { visibility: "PRIVATE" }],
+            },
+          ],
+        },
+        orderBy: { id: "asc" },
+      });
+      return docs;
     } catch (error) {
       throw new InternalServerErrorException("ドキュメントの取得に失敗しました");
     }
@@ -46,26 +52,5 @@ export class DocumentRepository {
     } catch (error) {
       throw new InternalServerErrorException("ドキュメントの作成に失敗しました");
     }
-  }
-
-  private async getPublicDocuments(): Promise<Document[]> {
-    return this.prisma.document.findMany({
-      where: { visibility: "PUBLIC" },
-    });
-  }
-
-  private async getSpaceDocuments(spaceId: string): Promise<Document[]> {
-    return this.prisma.document.findMany({
-      where: { spaceId },
-    });
-  }
-
-  private async getPrivateDocuments(userId: string): Promise<Document[]> {
-    return this.prisma.document.findMany({
-      where: {
-        visibility: "PRIVATE",
-        userId,
-      },
-    });
   }
 }

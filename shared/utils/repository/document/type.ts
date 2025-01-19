@@ -29,3 +29,7 @@ export type PostDocumentRequest = {
 export type PostDocumentResponse = {
   id: string;
 };
+
+export type GetDocumentListResponse = {
+  documents: Document[];
+};
