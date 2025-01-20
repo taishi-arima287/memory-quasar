@@ -3,6 +3,8 @@ import { GetDocumentListRequest, GetDocumentListResponse } from "./dto/get-docum
 import { GetDocumentRequest, GetDocumentResponse } from "./dto/get-document.dto";
 import { PostDocumentRequest, PostDocumentResponse } from "./dto/post-document.dto";
 import { DocumentRepository } from "./document.repository";
+import { PutDocumentRequest, PutDocumentResponse } from "./dto/put-document.dto";
+import { DeleteDocumentRequest, DeleteDocumentResponse } from "./dto/delete-document.dto";
 
 @Injectable()
 export class DocumentService {
@@ -28,5 +30,19 @@ export class DocumentService {
   async postDocument(postDocumentRequest: PostDocumentRequest): Promise<PostDocumentResponse> {
     const document = await this.documentRepository.postDocument(postDocumentRequest);
     return { id: document.id };
+  }
+
+  async putDocument(
+    putDocumentRequest: PutDocumentRequest & { id: string },
+  ): Promise<PutDocumentResponse> {
+    await this.documentRepository.putDocument(putDocumentRequest);
+    return { id: putDocumentRequest.id };
+  }
+
+  async deleteDocument(
+    deleteDocumentRequest: DeleteDocumentRequest,
+  ): Promise<DeleteDocumentResponse> {
+    await this.documentRepository.deleteDocument(deleteDocumentRequest);
+    return { id: deleteDocumentRequest.id };
   }
 }
