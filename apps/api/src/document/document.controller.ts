@@ -1,13 +1,28 @@
-import { Controller, Get, Post, Param, Body, Query, UseGuards } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiExtraModels } from "@nestjs/swagger";
+import { Controller, Get, Post, Put, Delete, Param, Body, Query, UseGuards } from "@nestjs/common";
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiParam,
+  ApiExtraModels,
+  ApiBody,
+} from "@nestjs/swagger";
 import { DocumentService } from "./document.service";
 import { GetDocumentRequest, GetDocumentResponse } from "./dto/get-document.dto";
 import { GetDocumentListRequest, GetDocumentListResponse } from "./dto/get-documentList.dto";
 import { PostDocumentRequest, PostDocumentResponse } from "./dto/post-document.dto";
+import { PutDocumentRequest, PutDocumentResponse } from "./dto/put-document.dto";
+import { DeleteDocumentRequest, DeleteDocumentResponse } from "./dto/delete-document.dto";
 import { AuthGuard } from "@/auth/guards/auth.guard";
 
 @ApiTags("document")
-@ApiExtraModels(GetDocumentRequest)
+@ApiExtraModels(
+  GetDocumentRequest,
+  GetDocumentListRequest,
+  PostDocumentRequest,
+  PutDocumentRequest,
+  DeleteDocumentRequest,
+)
 @Controller("document")
 @UseGuards(AuthGuard)
 export class DocumentController {
@@ -52,5 +67,38 @@ export class DocumentController {
   ): Promise<PostDocumentResponse> {
     const document = await this.documentService.postDocument(postDocumentRequest);
     return { id: document.id };
+  }
+
+  @Put(":id")
+  @ApiOperation({ summary: "ドキュメント更新" })
+  @ApiParam({
+    name: "id",
+    type: String,
+    description: "更新対象のドキュメントID",
+    example: "ckv9ydh6s0000gkpj1wybug0x",
+  })
+  @ApiBody({ type: PutDocumentRequest })
+  @ApiResponse({
+    status: 200,
+    description: "ドキュメントの更新に成功",
+    type: PutDocumentResponse,
+  })
+  async putDocument(
+    @Param("id") id: string,
+    @Body() body: Omit<PutDocumentRequest, "id">,
+  ): Promise<PutDocumentResponse> {
+    const putDocumentRequest = {
+      id,
+      ...body,
+    };
+    return this.documentService.putDocument(putDocumentRequest);
+  }
+
+  @Delete(":id")
+  @ApiOperation({ summary: "ドキュメント削除" })
+  async deleteDocument(
+    @Param() deleteDocumentRequest: DeleteDocumentRequest,
+  ): Promise<DeleteDocumentResponse> {
+    return this.documentService.deleteDocument(deleteDocumentRequest);
   }
 }
