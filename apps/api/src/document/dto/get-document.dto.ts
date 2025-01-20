@@ -59,6 +59,12 @@ export class GetDocumentListRequest {
     description: "スペースID",
   })
   spaceId!: string;
+
+  @ApiProperty({
+    example: "https://example.com/thumbnail.jpg",
+    description: "サムネイルURL",
+  })
+  thumbnail!: string;
 }
 
 export class GetDocumentListResponse {

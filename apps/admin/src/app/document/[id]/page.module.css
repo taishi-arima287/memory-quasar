@@ -1,0 +1,25 @@
+.main {
+  min-height: 100vh;
+  background-color: #eee;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: var(--max-width-lg);
+  margin: auto;
+  padding: var(--spacing-lg);
+  gap: var(--spacing-sm);
+}
+
+.title {
+  max-width: var(--max-width-lg);
+  margin: 12px auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

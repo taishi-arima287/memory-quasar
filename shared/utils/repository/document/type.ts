@@ -12,6 +12,7 @@ export type Document = {
   userId: string;
   spaceId: string | null;
   userName: string;
+  thumbnail: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -28,4 +29,17 @@ export type PostDocumentRequest = {
 
 export type PostDocumentResponse = {
   id: string;
+};
+
+export type GetDocumentResponse = {
+  document: Document;
+};
+
+export type GetDocumentListResponse = {
+  documents: Document[];
+};
+
+export type GetDocumentListRequest = {
+  userId: string;
+  spaceId: string;
 };

@@ -41,6 +41,12 @@ export class PostDocumentRequest {
   userName!: string;
 
   @ApiProperty({
+    example: "https://example.com/thumbnail.jpg",
+    description: "サムネイルURL",
+  })
+  thumbnail!: string;
+
+  @ApiProperty({
     example: "ckv9ydh6s0000gkpj1wybug0x",
     description: "スペースID",
   })

@@ -22,6 +22,12 @@ export class GetDocumentListRequest {
   @MaxLength(DOCUMENT_CONSTANTS.MAX_ID_LENGTH)
   @Matches(VALIDATION_PATTERNS.CUID)
   spaceId!: string;
+
+  @ApiProperty({
+    example: "https://example.com/thumbnail.jpg",
+    description: "サムネイルURL",
+  })
+  thumbnail!: string;
 }
 
 export class GetDocumentListResponse {
@@ -35,6 +41,7 @@ export class GetDocumentListResponse {
         userName: "ユーザー名",
         userId: "clrjl0mlw0001gkpj1wybug0x",
         spaceId: "clrjl0mlw0002gkpj1wybug0x",
+        thumbnail: "https://example.com/thumbnail.jpg",
       },
     ],
     description: "ドキュメント一覧",
@@ -47,5 +54,6 @@ export class GetDocumentListResponse {
     visibility: DocumentVisibility;
     userId: string;
     spaceId: string | null;
+    thumbnail: string | null;
   }[];
 }

@@ -33,6 +33,8 @@ CREATE TABLE "documents" (
     "title" VARCHAR(100) NOT NULL,
     "content" TEXT NOT NULL,
     "visibility" "DocumentVisibility" NOT NULL DEFAULT 'PRIVATE',
+    "user_name" VARCHAR(100) NOT NULL,
+    "thumbnail" VARCHAR(255),
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
@@ -41,9 +43,6 @@ CREATE TABLE "documents" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
-
--- CreateIndex
-CREATE UNIQUE INDEX "documents_title_key" ON "documents"("title");
 
 -- CreateIndex
 CREATE INDEX "documents_space_id_visibility_idx" ON "documents"("space_id", "visibility");

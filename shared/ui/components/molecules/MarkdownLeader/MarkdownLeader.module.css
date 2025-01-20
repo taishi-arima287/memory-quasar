@@ -1,0 +1,9 @@
+.container {
+  width: var(--max-width-lg);
+  min-height: var(--min-height-xl);
+  padding: var(--spacing-2xl);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: #fff;
+}
