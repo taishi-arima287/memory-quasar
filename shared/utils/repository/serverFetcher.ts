@@ -1,14 +1,14 @@
 // サーバー用
 import { cookies } from "next/headers";
 
-export async function serverFetcher<Response>({
+export async function serverFetcher<Response, Request = undefined>({
   uri,
   method,
   body,
 }: {
   uri: string;
   method: string;
-  body?: any;
+  body?: Request;
 }): Promise<Response> {
   const cookieStore = await cookies();
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${uri}`, {

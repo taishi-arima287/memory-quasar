@@ -2,13 +2,16 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Link from "next/link";
 import Image from "next/image";
-import { GetDocumentListResponse } from "@memory-quasar/shared/utils/repository/document/type";
+import {
+  GetDocumentListResponse,
+  GetDocumentListRequest,
+} from "@memory-quasar/shared/utils/repository/document/type";
 import { serverFetcher } from "@memory-quasar/shared/utils/repository/serverFetcher";
 import styles from "./page.module.css";
 async function getDocuments(userId: string, spaceId: string): Promise<GetDocumentListResponse> {
   "use server";
   try {
-    const result = await serverFetcher<GetDocumentListResponse>({
+    const result = await serverFetcher<GetDocumentListResponse, GetDocumentListRequest>({
       uri: `/document?userId=${userId}&spaceId=${spaceId}`,
       method: "GET",
     });

@@ -31,6 +31,15 @@ export type PostDocumentResponse = {
   id: string;
 };
 
+export type GetDocumentResponse = {
+  document: Document;
+};
+
 export type GetDocumentListResponse = {
   documents: Document[];
+};
+
+export type GetDocumentListRequest = {
+  userId: string;
+  spaceId: string;
 };
