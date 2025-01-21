@@ -2,7 +2,6 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { ButtonGroup } from "./ButtonGroup";
 import { useRouter } from "next/navigation";
 
-// next/navigationのモック
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
 }));

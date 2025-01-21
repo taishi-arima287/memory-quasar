@@ -24,7 +24,7 @@
 }
 
 .secondary {
-  background: var(--color-primary);
+  background: var(--color-secondary);
   color: var(--color-white);
 }
 
@@ -32,25 +32,43 @@
   opacity: 0.6;
 }
 
+.tertiary {
+  background: var(--color-tertiary);
+  color: var(--color-white);
+}
+
+.tertiary:hover:not(:disabled) {
+  opacity: 0.6;
+}
+
+.outline {
+  background: #fff;
+}
+
 .outline.primary {
   border: 1px solid var(--color-primary);
-  background: #fff;
   color: var(--color-primary);
 }
 
 .outline.primary:hover:not(:disabled) {
-  color: var(--color-primary);
   opacity: 0.8;
 }
 
 .outline.secondary {
-  border: 1px solid var(--color-text-light);
-  background: #fff;
-  color: var(--color-text-light);
+  border: 1px solid var(--color-secondary);
+  color: var(--color-secondary);
 }
 
 .outline.secondary:hover:not(:disabled) {
-  color: var(--color-text-light);
+  opacity: 0.8;
+}
+
+.outline.tertiary {
+  border: 1px solid var(--color-tertiary);
+  color: var(--color-tertiary);
+}
+
+.outline.tertiary:hover:not(:disabled) {
   opacity: 0.8;
 }
 
