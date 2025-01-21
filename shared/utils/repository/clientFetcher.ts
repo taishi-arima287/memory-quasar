@@ -1,4 +1,3 @@
-// クライアント用
 type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
 
 interface FetcherOptions<Request> {

@@ -7,3 +7,7 @@ export { TextAreaWithError } from "./components/molecules/TextAreaWithError/Text
 export type { TextAreaWithErrorProps } from "./components/molecules/TextAreaWithError/TextAreaWithError";
 export { MarkdownEditor } from "./components/molecules/MarkdownEditor/MarkdownEditor";
 export type { MarkdownEditorProps } from "./components/molecules/MarkdownEditor/MarkdownEditor";
+export { Modal } from "./components/organisms/Modal/Modal";
+export type { ModalProps } from "./components/organisms/Modal/Modal";
+export { DeleteModal } from "./components/organisms/Modal/DeleteModal/DeleteModal";
+export type { DeleteModalProps } from "./components/organisms/Modal/DeleteModal/DeleteModal";

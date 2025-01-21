@@ -3,7 +3,7 @@ import styles from "./Button.module.css";
 
 export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className"> {
   label: string;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "tertiary";
   size?: "xs" | "sm" | "md" | "lg" | "xl" | "full";
   outline?: boolean;
   className?: string;

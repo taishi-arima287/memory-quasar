@@ -43,3 +43,21 @@ export type GetDocumentListRequest = {
   userId: string;
   spaceId: string;
 };
+
+export type DeleteDocumentRequest = {
+  id: string;
+};
+
+export type DeleteDocumentResponse = {
+  id: string;
+};
+
+export type UpdateDocumentRequest = {
+  id: string;
+  title: string;
+  content: string;
+};
+
+export type UpdateDocumentResponse = {
+  id: string;
+};

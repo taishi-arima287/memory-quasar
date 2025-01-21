@@ -1,4 +1,3 @@
-// サーバー用
 import { cookies } from "next/headers";
 
 export async function serverFetcher<Response, Request = undefined>({

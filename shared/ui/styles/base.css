@@ -45,6 +45,7 @@ textarea {
   /* Colors */
   --color-primary: #66ff66;
   --color-secondary: #6666ff;
+  --color-tertiary: #ff6666;
   --color-warning: #f59e0b;
   --color-success: #22c55e;
   --color-error: #dc2626;

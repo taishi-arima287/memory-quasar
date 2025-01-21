@@ -1,0 +1,44 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  padding: var(--spacing-md);
+  gap: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-white);
+}
+
+.modalOverlay {
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modalContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  gap: var(--spacing-md);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: var(--spacing-lg);
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: var(--spacing-md);
+}
