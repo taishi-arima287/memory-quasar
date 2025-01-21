@@ -3,9 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "exports": {
-    ".": "./index.ts",
     "./ui": "./ui/index.ts",
-    "./type": "./type/index.ts"
+    "./utils/repository": "./utils/repository/index.ts"
   },
   "files": [
     "ui/**/*",

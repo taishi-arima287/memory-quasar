@@ -1,16 +1,15 @@
 import { Modal } from "./Modal";
 import type { Meta, StoryObj } from "@storybook/react";
-import { useEffect } from "react";
 import ReactModal from "react-modal";
 import { Button } from "@memory-quasar/shared/ui";
 
-const ModalDecorator = (Story: any) => {
-  useEffect(() => {
-    ReactModal.setAppElement("#storybook-root");
-  }, []);
-
-  return <Story />;
-};
+// モーダルのルート要素を設定
+if (typeof document !== "undefined") {
+  const modalRoot = document.createElement("div");
+  modalRoot.setAttribute("id", "modal-root");
+  document.body.appendChild(modalRoot);
+  ReactModal.setAppElement("#modal-root");
+}
 
 const meta = {
   title: "Organisms/Modal",
@@ -19,7 +18,6 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-  decorators: [ModalDecorator],
 } satisfies Meta<typeof Modal>;
 
 export default meta;
@@ -27,16 +25,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    isOpen: false,
+    isOpen: true,
     onClose: () => {},
+    children: <div>Modal Content</div>,
     title: "モーダル",
-    children: <div>モーダルの中身</div>,
-    footer: (
-      <>
-        <Button onClick={() => {}} label="閉じる" size="xs" outline></Button>
-        <Button onClick={() => {}} label="進む" size="xs"></Button>
-      </>
-    ),
   },
 };
 
