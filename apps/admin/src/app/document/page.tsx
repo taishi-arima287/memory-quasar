@@ -53,8 +53,11 @@ export default async function DocumentPage() {
               )}
             </div>
             <div className={styles.documentContent}>
-              <p className={styles.documentTitle}>{document.title}</p>
-              <Link href={`/document/${document.id}`}>詳細</Link>
+              <h3 className={styles.documentTitle}>{document.title}</h3>
+              <div className={styles.buttonGroup}>
+                <Link href={`/document/${document.id}`}>詳細</Link>
+                <Link href={`/document/update/${document.id}`}>更新</Link>
+              </div>
             </div>
           </li>
         ))}
