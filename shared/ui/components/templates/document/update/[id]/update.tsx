@@ -1,13 +1,13 @@
 "use client";
-import styles from "./page.module.css";
-import { Button, TextboxWithError, MarkdownEditor } from "@memory-quasar/shared/ui";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { DocumentVisibility } from "@memory-quasar/shared/utils/repository/document/type";
-import { useSession } from "next-auth/react";
 import { clientFetcher } from "@memory-quasar/shared/utils/repository/clientFetcher";
 import { useRouter } from "next/navigation";
+import { Document } from "@memory-quasar/shared/utils/repository/document/type";
+import { Button, TextboxWithError, MarkdownEditor } from "@memory-quasar/shared/ui";
+import styles from "./update.module.css";
 
 const documentSchema = z.object({
   title: z.string().min(1, { message: "ドキュメントタイトルを入力してください" }).nullable(),
@@ -16,7 +16,7 @@ const documentSchema = z.object({
 
 type DocumentFormData = z.infer<typeof documentSchema>;
 
-export default function DocumentCreatePage() {
+export const Update = ({ document }: { document: Document }) => {
   const {
     register,
     formState: { errors, isValid },
@@ -24,29 +24,28 @@ export default function DocumentCreatePage() {
     setValue,
   } = useForm<DocumentFormData>({
     resolver: zodResolver(documentSchema),
+    defaultValues: {
+      title: document.title || "",
+      content: document.content || "",
+    },
   });
-
-  const { data: session } = useSession();
   const router = useRouter();
 
   const onSubmit = async (data: DocumentFormData) => {
     try {
       const result = await clientFetcher({
-        uri: "/document",
-        method: "POST",
+        uri: `/document/${document.id}`,
+        method: "PUT",
         body: {
           ...data,
           thumbnail: "",
           visibility: DocumentVisibility.PUBLIC,
-          userName: session?.user?.name,
-          userId: session?.user?.id,
-          spaceId: session?.user?.spaceId,
         },
       });
 
       if (!result.ok) {
         router.push(
-          `/error-page?message=${encodeURIComponent(result.error || "")}&returnPath=${encodeURIComponent("/document/create")}`,
+          `/error-page?message=${encodeURIComponent(result.error || "")}&returnPath=${encodeURIComponent(`/document/update/${document.id}`)}`,
         );
         return;
       }
@@ -60,7 +59,7 @@ export default function DocumentCreatePage() {
 
   return (
     <main className={styles.container}>
-      <h1 className={styles.title}>ドキュメント新規作成</h1>
+      <h1 className={styles.title}>ドキュメント更新</h1>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <TextboxWithError
           label="ドキュメントタイトル"
@@ -72,14 +71,15 @@ export default function DocumentCreatePage() {
         <MarkdownEditor
           label="ドキュメント内容"
           className={styles.markdownEditor}
+          defaultValue={document.content}
           {...register("content")}
           onChange={(value: string) => {
-            setValue("content", value);
+            setValue("content", value, { shouldValidate: true });
           }}
           placeholder="ドキュメント内容を入力してください"
         />
-        <Button type="submit" label="ドキュメント作成" disabled={!isValid}></Button>
+        <Button type="submit" label="ドキュメント更新" disabled={!isValid}></Button>
       </form>
     </main>
   );
-}
+};
