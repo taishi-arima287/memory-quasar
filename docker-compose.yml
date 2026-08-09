@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:latest
+    image: postgres:17
     restart: always
     environment:
       - POSTGRES_USER=user
@@ -10,45 +10,72 @@ services:
       - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    networks:
-      - memory-quasar-network
-
-  web:
-    build:
-      context: ./apps/web
-      dockerfile: Dockerfile
-    ports:
-      - '3000:3000'
-    volumes:
-      - ./apps/web:/app
-      - /app/node_modules
-    depends_on:
-      - api
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U user -d dbname']
+      interval: 5s
+      timeout: 5s
+      retries: 10
     networks:
       - memory-quasar-network
 
   api:
     build:
-      context: ./apps/api
-      dockerfile: Dockerfile
+      # shared/ とルートの package-lock.json が必要なため、コンテキストはルート
+      context: .
+      dockerfile: apps/api/Dockerfile
     ports:
-      - '3001:3001'
+      - '8080:8080'
+    volumes:
+      - ./apps/api:/repo/apps/api
+      - /repo/apps/api/node_modules
+      - /repo/apps/api/dist
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
+      - NODE_ENV=development
+      - PORT=8080
       - DATABASE_URL=postgresql://user:password@db:5432/dbname?schema=public
+      - JWT_SECRET=${JWT_SECRET:-dev-jwt-secret}
+      - JWT_EXPIRES_IN=1d
+    networks:
+      - memory-quasar-network
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      - INTERNAL_API_URL=http://api:8080
+    volumes:
+      - ./apps/web:/repo/apps/web
+      - ./shared:/repo/shared
+      # ホスト（macOS）の node_modules / .next で上書きされないように隠す
+      - /repo/apps/web/node_modules
+      - /repo/apps/web/.next
+      - /repo/shared/node_modules
+    depends_on:
+      - api
     networks:
       - memory-quasar-network
 
   admin:
     build:
-      context: ./apps/admin
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: apps/admin/Dockerfile
     ports:
-      - '3002:3002'
+      - '8000:8000'
+    environment:
+      - INTERNAL_API_URL=http://api:8080
     volumes:
-      - ./apps/admin:/app
-      - /app/node_modules
+      - ./apps/admin:/repo/apps/admin
+      - ./shared:/repo/shared
+      # ホスト（macOS）の node_modules / .next で上書きされないように隠す
+      - /repo/apps/admin/node_modules
+      - /repo/apps/admin/.next
+      - /repo/shared/node_modules
     depends_on:
       - api
     networks:
@@ -59,4 +86,4 @@ networks:
     driver: bridge
 
 volumes:
-  postgres_data: 
+  postgres_data:
