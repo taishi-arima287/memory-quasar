@@ -17,12 +17,17 @@ memory-quasar は、日本語ドキュメントを扱うモノレポ構成のド
 
 ## ビルド・開発コマンド
 
-```bash
-# 依存関係のインストール（ルートで実行後、各アプリで実行）
-npm install
-cd apps/web && npm install && cd ../admin && npm install && cd ../api && npm install && cd ../..
+セットアップ手順の詳細は `README.md` を参照。
 
-# 全アプリケーションを並列で起動
+```bash
+# 依存関係のインストール（npm workspaces のためルートで一度だけでよい）
+npm install
+
+# 全サービス（db / api / web / admin）を Docker で起動
+docker compose up -d
+
+# Docker を使わずローカルで動かす場合（DB だけ Docker）
+docker compose up -d db
 npm run dev
 
 # 各アプリケーションを個別に起動
@@ -30,17 +35,16 @@ npm run dev:web    # Web フロントエンド（ポート 3000）
 npm run dev:admin  # 管理画面（ポート 8000）
 npm run dev:api    # API サーバー（ポート 8080）
 
-# データベース操作（Prisma）
+# データベース操作（Prisma / ホストから実行。apps/api/.env の DATABASE_URL は localhost:5432 を指す）
 npm run db:view           # Prisma Studio を開く
-npm run db:migrate        # マイグレーション実行
+npm run db:migrate        # マイグレーションの作成と実行
 npm run db:migrate:reset  # データベースのリセット
 npm run db:seed           # シードデータ投入
 
-# Prisma コマンドを直接実行する場合（apps/api で実行）
-cd apps/api
-npx prisma generate       # Prisma クライアントの生成
-npx prisma migrate dev    # マイグレーションの作成と実行
-npx prisma studio         # データベース GUI
+# Prisma をコンテナ内で実行する場合（compose の DATABASE_URL が db:5432 を指す）
+docker compose exec api npx prisma migrate deploy
+docker compose exec api npx prisma migrate status
+docker compose exec api npm run prisma:seed
 
 # Lint とフォーマット
 npm run lint              # 全ての Linter を実行
@@ -51,8 +55,16 @@ npm run format:check      # フォーマットのチェック
 cd shared && npm test     # Jest テストを実行
 
 # Storybook（共有 UI コンポーネント）
-npm run storybook         # Storybook を起動（ポート 6007）
+npm run storybook         # ポート 6007
 ```
+
+注意点:
+- Node.js は 20 以上が必要（web / admin が使う `@tailwindcss/oxide` が `node >= 20` を要求）。
+- `prisma generate` は `npm install` の postinstall で実行されるため、通常は明示的な実行は不要。
+- `npm run storybook` は現在起動に失敗する（既知）。`shared/package.json` の `exports` が
+  `./utils/repository` までしか公開しておらず、`DeleteModal.tsx` が参照する
+  `./utils/repository/clientFetcher` を解決できないため。Tailwind 導入以前からの問題。
+- `npm run lint` は既存の指摘（`DeleteModal.test.tsx` の `no-explicit-any` 等）で失敗する。
 
 ## アーキテクチャ
 
