@@ -27,7 +27,7 @@ export default async function DocumentDetailPage({ params }: { params: { id: str
         <h1>ドキュメント詳細</h1>
       </div>
       <div className="flex flex-col items-center">
-        <h2 className="mx-auto my-3 max-w-3xl">{document?.title}</h2>
+        <h2 className="my-3 w-192">{document?.title}</h2>
         <MarkdownLeader content={document?.content} />
       </div>
       <ButtonGroup />

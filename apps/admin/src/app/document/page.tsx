@@ -39,7 +39,12 @@ export default async function DocumentPage() {
     <main>
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-2 p-4">
         <h1>ドキュメント一覧</h1>
-        <Link href="./document/create" role="button" aria-label="ドキュメントを新規作成">
+        <Link
+          href="./document/create"
+          role="button"
+          aria-label="ドキュメントを新規作成"
+          className="text-link no-underline hover:underline"
+        >
           ドキュメント新規作成
         </Link>
       </div>
