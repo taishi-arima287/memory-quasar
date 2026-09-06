@@ -7,7 +7,6 @@ import {
   GetDocumentListRequest,
 } from "@memory-quasar/shared/utils/repository/document/type";
 import { serverFetcher } from "@memory-quasar/shared/utils/repository/serverFetcher";
-import styles from "./page.module.css";
 async function getDocuments(userId: string, spaceId: string): Promise<GetDocumentListResponse> {
   "use server";
   try {
@@ -38,25 +37,40 @@ export default async function DocumentPage() {
 
   return (
     <main>
-      <div className={styles.header}>
+      <div className="mx-auto flex max-w-3xl flex-col items-center gap-2 p-4">
         <h1>ドキュメント一覧</h1>
         <Link href="./document/create" role="button" aria-label="ドキュメントを新規作成">
           ドキュメント新規作成
         </Link>
       </div>
-      <ul className={styles.documentList}>
+      <ul className="mx-auto flex max-w-3xl flex-wrap gap-3 p-3">
         {documents.documents.map((document) => (
-          <li key={document.id} className={styles.documentItem}>
-            <div className={styles.thumbnailContainer}>
+          <li
+            key={document.id}
+            className="flex h-80 min-w-60 flex-col items-center justify-between rounded-lg border border-border pb-3"
+          >
+            <div className="h-50 w-full rounded-t-lg bg-not-image">
               {document.thumbnail && (
                 <Image src={document.thumbnail} width={320} height={200} alt={document.title} />
               )}
             </div>
-            <div className={styles.documentContent}>
-              <h3 className={styles.documentTitle}>{document.title}</h3>
-              <div className={styles.buttonGroup}>
-                <Link href={`/document/${document.id}`}>詳細</Link>
-                <Link href={`/document/update/${document.id}`}>更新</Link>
+            <div className="flex h-25 w-full flex-col items-center justify-between">
+              <h3 className="w-full max-w-xs overflow-hidden pt-1 pl-3 text-left text-base font-semibold text-ellipsis whitespace-nowrap">
+                {document.title}
+              </h3>
+              <div className="flex gap-3">
+                <Link
+                  href={`/document/${document.id}`}
+                  className="text-link no-underline hover:underline"
+                >
+                  詳細
+                </Link>
+                <Link
+                  href={`/document/update/${document.id}`}
+                  className="text-link no-underline hover:underline"
+                >
+                  更新
+                </Link>
               </div>
             </div>
           </li>

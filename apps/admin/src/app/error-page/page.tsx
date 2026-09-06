@@ -1,7 +1,6 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import styles from "./page.module.css";
 import { Button } from "@memory-quasar/shared/ui";
 
 export default function ErrorPage() {
@@ -11,10 +10,10 @@ export default function ErrorPage() {
   const returnPath = searchParams.get("returnPath") || "/";
 
   return (
-    <main className={styles.error}>
+    <main className="flex min-h-screen flex-col items-center justify-center gap-6 p-6 text-center">
       <h2>エラーが発生しました</h2>
       <p>{errorMessage}</p>
-      <div className={styles.buttonContainer}>
+      <div className="flex flex-col items-center gap-3">
         <p>前の画面に戻って再度お試しください</p>
         <Button
           onClick={() => router.push(returnPath)}

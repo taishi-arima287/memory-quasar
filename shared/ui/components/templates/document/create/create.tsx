@@ -1,5 +1,4 @@
 "use client";
-import styles from "./create.module.css";
 import { Button, TextboxWithError, MarkdownEditor } from "@memory-quasar/shared/ui";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -58,9 +57,12 @@ export const Create = () => {
     }
   };
   return (
-    <main className={styles.container}>
-      <h1 className={styles.title}>ドキュメント新規作成</h1>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+    <main className="flex flex-col mt-5">
+      <h1 className="text-center">ドキュメント新規作成</h1>
+      <form
+        className="mx-auto mb-10 flex w-[730px] flex-col items-center gap-4"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <TextboxWithError
           label="ドキュメントタイトル"
           size="full"
@@ -70,14 +72,14 @@ export const Create = () => {
         />
         <MarkdownEditor
           label="ドキュメント内容"
-          className={styles.markdownEditor}
+          className="w-full"
           {...register("content")}
           onChange={(value: string) => {
             setValue("content", value);
           }}
           placeholder="ドキュメント内容を入力してください"
         />
-        <div className={styles.buttonGroup}>
+        <div className="flex justify-center gap-2 my-4 px-4">
           <Button
             type="button"
             label="戻る"

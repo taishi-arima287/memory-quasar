@@ -82,6 +82,15 @@ npm run storybook         # Storybook を起動（ポート 6007）
 - コンポーネント: Button、Textbox、TextboxWithError、TextAreaWithError、MarkdownEditor、Modal、DeleteModal
 - リポジトリユーティリティ: API 通信用のクライアント / サーバー fetcher
 
+### スタイリング（Tailwind CSS v4）
+- スタイルは Tailwind のユーティリティクラスで記述する（CSS Modules は廃止済み）
+- エントリは `shared/ui/styles/base.css`。各アプリの `layout.tsx` から読み込む
+- `@theme` には Tailwind に存在しないトークン（ブランドカラー、フォントファミリ）だけを定義する。
+  spacing / radius / font-size / width / height / z-index は Tailwind の既定スケールを使う
+- `shared` は npm workspaces のシンボリックリンク経由で解決されるため Tailwind の自動検出対象外。
+  `base.css` の `@source "../components"` でスキャン対象に登録している（対象を増やす場合は `@source` を追加）
+- PostCSS 設定は `apps/web`、`apps/admin`、`shared` にそれぞれ `postcss.config.mjs` を配置
+
 ### フロントエンドアプリ（Next.js 15）
 - `src/app/` 配下の App Router 構成
 - 認証には NextAuth を使用
@@ -104,3 +113,11 @@ docker compose up -d db     # DB だけ起動（アプリは npm run dev で動�
   `@memory-quasar/shared` を `file:../../shared` で参照しているため、
   アプリのディレクトリだけをコンテキストにすると `npm install` に失敗する。
 - ソースはバインドマウントされ、いずれのサービスも dev モード（ホットリロード）で動く。
+- web / admin のイメージは `node:22-alpine`。Tailwind v4 のネイティブバイナリ
+  `@tailwindcss/oxide` が `engines: node >= 20` のため、Node 18 では
+  optional dependency として静かにスキップされ `Cannot find native binding` で落ちる。
+- `node_modules` は anonymous volume で隠されているため、依存を追加したら
+  イメージの再ビルドとボリュームの作り直しが必要:
+  `docker compose rm -sfv web admin && docker compose build web admin && docker compose up -d`
+  （`-v` は anonymous volume のみ対象。named volume の `postgres_data` は消えない）
+- Docker で全サービスを動かす場合、ローカルの `npm run dev` とはポートが衝突する。併用しないこと。

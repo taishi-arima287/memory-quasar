@@ -17,9 +17,9 @@ describe("shared/ui/components/molecules/MarkdownLeader/index.tsx", () => {
     (marked as unknown as jest.Mock).mockReturnValue(mockHtml);
 
     const { container } = render(<MarkdownLeader content={mockContent} />);
-    const markdownContainer = container.querySelector(".container");
+    const markdownContainer = container.firstElementChild;
 
-    expect(markdownContainer).toHaveClass("container");
+    expect(markdownContainer).toHaveClass("border-border");
     expect(markdownContainer?.innerHTML).toBe(mockHtml);
     expect(marked).toHaveBeenCalledWith(mockContent);
   });
@@ -29,7 +29,7 @@ describe("shared/ui/components/molecules/MarkdownLeader/index.tsx", () => {
     (marked as unknown as jest.Mock).mockReturnValue("");
 
     const { container } = render(<MarkdownLeader content={emptyContent} />);
-    const markdownContainer = container.querySelector(".container");
+    const markdownContainer = container.firstElementChild;
 
     expect(markdownContainer).toBeEmptyDOMElement();
   });

@@ -2,7 +2,6 @@
 
 import ReactModal from "react-modal";
 import { useEffect } from "react";
-import styles from "./Modal.module.css";
 
 export type ModalProps = {
   isOpen: boolean;
@@ -23,14 +22,14 @@ export const Modal = ({ isOpen, onClose, title, children, footer }: ModalProps) 
     <ReactModal
       isOpen={isOpen}
       onRequestClose={onClose}
-      className={styles.modal}
-      overlayClassName={styles.modalOverlay}
+      className="flex w-full max-w-150 flex-col gap-3 rounded-xl bg-white p-3"
+      overlayClassName="fixed inset-0 flex items-center justify-center bg-black/50"
     >
-      <div className={styles.modalHeader}>
+      <div className="flex h-4 w-full justify-center">
         <h2>{title}</h2>
       </div>
-      <div className={styles.modalContent}>{children}</div>
-      <div className={styles.modalFooter}>{footer}</div>
+      <div className="flex min-h-25 items-center justify-center gap-3">{children}</div>
+      <div className="flex w-full justify-center gap-3">{footer}</div>
     </ReactModal>
   );
 };

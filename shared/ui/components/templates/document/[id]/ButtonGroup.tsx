@@ -2,7 +2,6 @@
 
 import { Button } from "@memory-quasar/shared/ui";
 import { useRouter, useParams } from "next/navigation";
-import styles from "./ButtonGroup.module.css";
 import {
   useDeleteModal,
   DeleteModal,
@@ -17,7 +16,7 @@ export const ButtonGroup = () => {
   const params = useParams();
   const id = params.id as string;
   return (
-    <div className={styles.buttonGroup}>
+    <div className="flex justify-center gap-2 my-4 px-4">
       <Button
         label="戻る"
         onClick={() => router.push("/document")}

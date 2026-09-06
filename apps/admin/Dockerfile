@@ -1,7 +1,8 @@
 # ビルドコンテキストはモノレポのルート（docker-compose.yml を参照）
 # admin は @memory-quasar/shared を file:../../shared で参照するため、
 # ルートをコンテキストにしないと shared/ が見えず npm install に失敗する。
-FROM node:18-alpine
+# Tailwind v4 のネイティブバイナリ (@tailwindcss/oxide) が engines: node >= 20 のため 22 を使う
+FROM node:22-alpine
 
 WORKDIR /repo
 

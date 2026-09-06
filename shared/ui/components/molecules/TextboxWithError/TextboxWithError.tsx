@@ -1,6 +1,5 @@
 import { forwardRef, InputHTMLAttributes } from "react";
 import { Textbox } from "../../atoms/Textbox";
-import styles from "./TextboxWithError.module.css";
 
 export interface TextboxWithErrorProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   label: string;
@@ -8,18 +7,27 @@ export interface TextboxWithErrorProps extends Omit<InputHTMLAttributes<HTMLInpu
   size?: "xs" | "sm" | "md" | "lg" | "xl" | "full";
 }
 
+const sizeStyles = {
+  xs: "w-40",
+  sm: "w-60",
+  md: "w-80",
+  lg: "w-120",
+  xl: "w-160",
+  full: "w-full",
+} as const;
+
 export const TextboxWithError = forwardRef<HTMLInputElement, TextboxWithErrorProps>(
   ({ label, error, size = "md", className = "", id, ...props }, ref) => {
     const inputId = id || label.toLowerCase().replace(/\s+/g, "-");
 
     return (
-      <div className={`${styles.container} ${styles[size]} ${className}`}>
-        <label htmlFor={inputId} className={styles.label}>
+      <div className={`flex flex-col gap-1 max-[600px]:w-full ${sizeStyles[size]} ${className}`}>
+        <label htmlFor={inputId} className="text-sm font-medium text-text">
           {label}
         </label>
-        <div className={styles.inputContainer}>
-          <Textbox {...props} ref={ref} id={inputId} error={!!error} className={styles.textbox} />
-          {error && <p className={styles.errorMessage}>{error}</p>}
+        <div className="flex flex-col gap-1">
+          <Textbox {...props} ref={ref} id={inputId} error={!!error} className="w-full" />
+          {error && <p className="text-sm leading-[1.2] text-error">{error}</p>}
         </div>
       </div>
     );

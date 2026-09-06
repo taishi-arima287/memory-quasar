@@ -1,10 +1,12 @@
 import { forwardRef, InputHTMLAttributes } from "react";
-import styles from "./Textbox.module.css";
 
 export interface TextboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   error?: boolean;
   className?: string;
 }
+
+const baseStyle =
+  "h-10 w-full rounded-sm border p-2 text-base outline-none transition-all duration-200 focus:border-secondary disabled:cursor-not-allowed disabled:bg-disabled";
 
 export const Textbox = forwardRef<HTMLInputElement, TextboxProps>(
   ({ type = "text", error, className, ...props }, ref) => {
@@ -13,7 +15,7 @@ export const Textbox = forwardRef<HTMLInputElement, TextboxProps>(
         {...props}
         ref={ref}
         type={type}
-        className={`${styles.textbox} ${error ? styles.error : ""} ${className ?? ""}`}
+        className={`${baseStyle} ${error ? "border-error" : "border-border"} ${className ?? ""}`}
       />
     );
   },
