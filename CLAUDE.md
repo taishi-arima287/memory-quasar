@@ -2,6 +2,15 @@
 
 このファイルは、Claude Code (claude.ai/code) がこのリポジトリのコードを扱う際のガイドラインです。
 
+@AGENTS.md
+
+Next.js のドキュメントは `.next-docs/`（gitignore 済み）に配置され、`AGENTS.md` がその索引です。
+`.next-docs/` が無い場合、または Next.js を更新した場合は再生成してください:
+
+```bash
+npx @next/codemod@canary agents-md --output AGENTS.md
+```
+
 ## プロジェクト概要
 
 memory-quasar は、日本語ドキュメントを扱うモノレポ構成のドキュメント管理アプリケーションです。3 つのアプリケーションと 1 つの共有ライブラリパッケージで構成されています。
