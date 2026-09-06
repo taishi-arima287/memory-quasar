@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { apiBaseUrl } from "./apiBaseUrl";
 
 export async function serverFetcher<Response, Request = undefined>({
   uri,
@@ -10,7 +11,7 @@ export async function serverFetcher<Response, Request = undefined>({
   body?: Request;
 }): Promise<Response> {
   const cookieStore = await cookies();
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${uri}`, {
+  const response = await fetch(`${apiBaseUrl()}${uri}`, {
     method,
     headers: {
       "Content-Type": "application/json",

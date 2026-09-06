@@ -6,9 +6,9 @@ describe("shared/ui/components/atoms/Button/index.tsx", () => {
     render(<Button label="クリック" />);
     const button = screen.getByText("クリック");
     expect(button).toBeInTheDocument();
-    expect(button).toHaveClass("button");
-    expect(button).toHaveClass("primary");
-    expect(button).toHaveClass("md");
+    expect(button).toHaveClass("inline-flex");
+    expect(button).toHaveClass("bg-primary");
+    expect(button).toHaveClass("w-80");
   });
 
   it("クリックイベントが正しく発火すること", () => {
@@ -25,11 +25,11 @@ describe("shared/ui/components/atoms/Button/index.tsx", () => {
 
   it("異なるバリアントが正しく適用されること", () => {
     render(<Button label="クリック" variant="secondary" />);
-    expect(screen.getByText("クリック")).toHaveClass("secondary");
+    expect(screen.getByText("クリック")).toHaveClass("bg-secondary");
   });
 
   it("異なるサイズが正しく適用されること", () => {
     render(<Button label="クリック" size="lg" />);
-    expect(screen.getByText("クリック")).toHaveClass("lg");
+    expect(screen.getByText("クリック")).toHaveClass("w-120");
   });
 });

@@ -1,6 +1,5 @@
 import { serverFetcher } from "@memory-quasar/shared/utils/repository/serverFetcher";
 import { GetDocumentResponse } from "@memory-quasar/shared/utils/repository/document/type";
-import styles from "./page.module.css";
 import { ButtonGroup } from "@memory-quasar/shared/ui/components/templates/document/[id]/ButtonGroup";
 import { MarkdownLeader } from "@memory-quasar/shared/ui/components/molecules/MarkdownLeader";
 async function getDocument(id: string) {
@@ -23,12 +22,12 @@ export default async function DocumentDetailPage({ params }: { params: { id: str
   const { id } = params;
   const document = await getDocument(id);
   return (
-    <main className={styles.main}>
-      <div className={styles.header}>
+    <main className="min-h-screen">
+      <div className="mx-auto flex max-w-3xl flex-col items-center gap-2 p-4">
         <h1>ドキュメント詳細</h1>
       </div>
-      <div className={styles.content}>
-        <h2 className={styles.title}>{document?.title}</h2>
+      <div className="flex flex-col items-center">
+        <h2 className="mx-auto my-3 max-w-3xl">{document?.title}</h2>
         <MarkdownLeader content={document?.content} />
       </div>
       <ButtonGroup />

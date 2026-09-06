@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button, TextboxWithError } from "@memory-quasar/shared/ui";
-import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
@@ -62,11 +61,11 @@ export default function LoginPage() {
   };
 
   return (
-    <main className={styles.container}>
-      <div className={styles.card}>
-        <h1 className={styles.title}>Memory Quasar</h1>
-        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          {apiError && <p className={styles.errorMessage}>{apiError}</p>}
+    <main className="grid min-h-svh place-items-center p-4">
+      <div className="w-full max-w-120 rounded-xl p-6 max-[600px]:p-5">
+        <h1 className="mb-5 text-center text-lg font-semibold">Memory Quasar</h1>
+        <form className="flex flex-col items-center gap-4" onSubmit={handleSubmit(onSubmit)}>
+          {apiError && <p className="text-sm text-error">{apiError}</p>}
           <TextboxWithError
             label="メールアドレス"
             type="email"
@@ -88,7 +87,7 @@ export default function LoginPage() {
             label={isLoading ? "ログイン中..." : "ログイン"}
             size="full"
             disabled={isLoading}
-            className={styles.button}
+            className="mt-3"
           />
         </form>
       </div>

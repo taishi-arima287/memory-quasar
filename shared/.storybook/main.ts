@@ -34,34 +34,12 @@ const config = {
     autodocs: true,
   },
   webpackFinal: async (config: any) => {
-    // 既存のCSSルールを削除
+    // 既存のCSSルールを削除し、Tailwind を通すために postcss-loader 付きで処理し直す
     config.module.rules = config.module.rules.filter((rule: any) => !rule.test?.test?.(".css"));
 
-    // グローバルCSSを先に処理
     config.module.rules.push({
       test: /\.css$/,
-      exclude: /\.module\.css$/,
       use: ["style-loader", "css-loader", "postcss-loader"],
-    });
-
-    // CSSモジュールを後で処理（優先度を上げるため）
-    config.module.rules.push({
-      test: /\.module\.css$/,
-      use: [
-        "style-loader",
-        {
-          loader: "css-loader",
-          options: {
-            importLoaders: 1,
-            modules: {
-              auto: true,
-              localIdentName: "[local]_[hash:base64:5]",
-              exportLocalsConvention: "camelCase",
-            },
-          },
-        },
-        "postcss-loader",
-      ],
     });
 
     return config;

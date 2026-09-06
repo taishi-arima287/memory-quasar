@@ -1,3 +1,4 @@
+export * from "./apiBaseUrl";
 export * from "./clientFetcher";
 export * from "./document/type";
 export * from "./login/type";

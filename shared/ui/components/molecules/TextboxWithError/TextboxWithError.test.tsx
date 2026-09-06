@@ -28,7 +28,7 @@ describe("shared/ui/components/molecules/TextboxWithError/index.tsx", () => {
   it("サイズプロパティが正しく適用されること", () => {
     render(<TextboxWithError {...defaultProps} size="lg" />);
     const container = screen.getByLabelText("テストラベル").parentElement?.parentElement;
-    expect(container).toHaveClass("lg");
+    expect(container).toHaveClass("w-120");
   });
 
   it("無効化状態が正しく反映されること", () => {

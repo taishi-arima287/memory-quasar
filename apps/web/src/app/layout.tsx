@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "@memory-quasar/shared/ui/styles/base.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",

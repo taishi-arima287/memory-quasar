@@ -1,0 +1,22 @@
+# 依存関係（コンテナ内で改めてインストールする）
+node_modules
+**/node_modules
+
+# ビルド成果物
+**/.next
+**/out
+**/dist
+**/build
+**/coverage
+**/storybook-static
+
+# 環境変数（docker-compose.yml 側で指定する）
+**/.env
+**/.env.local
+**/.env.*.local
+
+# その他
+.git
+.gitignore
+.DS_Store
+**/*.log

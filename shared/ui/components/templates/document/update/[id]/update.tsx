@@ -7,7 +7,6 @@ import { clientFetcher } from "@memory-quasar/shared/utils/repository/clientFetc
 import { useRouter } from "next/navigation";
 import { Document } from "@memory-quasar/shared/utils/repository/document/type";
 import { Button, TextboxWithError, MarkdownEditor } from "@memory-quasar/shared/ui";
-import styles from "./update.module.css";
 
 const documentSchema = z.object({
   title: z.string().min(1, { message: "ドキュメントタイトルを入力してください" }).nullable(),
@@ -58,9 +57,12 @@ export const Update = ({ document }: { document: Document }) => {
   };
 
   return (
-    <main className={styles.container}>
-      <h1 className={styles.title}>ドキュメント更新</h1>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+    <main className="flex flex-col mt-5">
+      <h1 className="text-center">ドキュメント更新</h1>
+      <form
+        className="mx-auto mb-10 flex w-[730px] flex-col items-center gap-4"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <TextboxWithError
           label="ドキュメントタイトル"
           size="full"
@@ -70,7 +72,7 @@ export const Update = ({ document }: { document: Document }) => {
         />
         <MarkdownEditor
           label="ドキュメント内容"
-          className={styles.markdownEditor}
+          className="w-full"
           value={document.content}
           {...register("content")}
           onChange={(value: string) => {
@@ -78,7 +80,7 @@ export const Update = ({ document }: { document: Document }) => {
           }}
           placeholder="ドキュメント内容を入力してください"
         />
-        <div className={styles.buttonGroup}>
+        <div className="flex justify-center gap-2 my-4 px-4">
           <Button
             type="button"
             label="戻る"

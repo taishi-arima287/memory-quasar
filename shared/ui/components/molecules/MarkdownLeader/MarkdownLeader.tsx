@@ -1,6 +1,11 @@
 import { marked } from "marked";
-import styles from "./MarkdownLeader.module.css";
+
 export const MarkdownLeader = ({ content }: { content: string }) => {
   const html = marked(content);
-  return <div className={styles.container} dangerouslySetInnerHTML={{ __html: html }} />;
+  return (
+    <div
+      className="w-192 min-h-60 overflow-hidden rounded-lg border border-border bg-white p-6"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
 };

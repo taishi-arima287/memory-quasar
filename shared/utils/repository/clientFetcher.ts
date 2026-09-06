@@ -1,3 +1,5 @@
+import { apiBaseUrl } from "./apiBaseUrl";
+
 type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
 
 interface FetcherOptions<Request> {
@@ -29,7 +31,7 @@ export async function clientFetcher<Response, Request = undefined>({
   };
 
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${uri}`, {
+    const response = await fetch(`${apiBaseUrl()}${uri}`, {
       method,
       headers,
       credentials: "include",

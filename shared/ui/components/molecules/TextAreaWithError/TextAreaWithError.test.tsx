@@ -27,7 +27,7 @@ describe("shared/ui/components/molecules/TextAreaWithError/TextAreaWithError.tsx
 
   it("サイズプロパティが正しく適用されること", () => {
     const { container } = render(<TextAreaWithError {...defaultProps} size="lg" />);
-    expect(container.firstChild).toHaveClass("lg");
+    expect(container.firstChild).toHaveClass("w-120");
   });
 
   it("無効化状態が正しく反映されること", () => {

@@ -6,7 +6,7 @@ describe("shared/ui/components/atoms/TextArea/index.tsx", () => {
     render(<TextArea />);
     const textarea = screen.getByRole("textbox");
     expect(textarea).toBeInTheDocument();
-    expect(textarea).toHaveClass("textarea");
+    expect(textarea).toHaveClass("resize-none");
   });
 
   it("入力値の変更が正しく処理されること", () => {
@@ -22,7 +22,7 @@ describe("shared/ui/components/atoms/TextArea/index.tsx", () => {
 
   it("エラー状態が正しく反映されること", () => {
     render(<TextArea error />);
-    expect(screen.getByRole("textbox")).toHaveClass("error");
+    expect(screen.getByRole("textbox")).toHaveClass("border-error");
   });
 
   it("無効化状態が正しく反映されること", () => {

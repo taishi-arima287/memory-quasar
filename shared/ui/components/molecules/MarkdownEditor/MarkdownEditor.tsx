@@ -3,7 +3,6 @@ import { forwardRef } from "react";
 import dynamic from "next/dynamic";
 import type { SimpleMDEReactProps } from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
-import styles from "./MarkdownEditor.module.css";
 
 export interface MarkdownEditorProps extends SimpleMDEReactProps {
   label: string;
@@ -18,7 +17,7 @@ export const MarkdownEditor = forwardRef<HTMLDivElement, MarkdownEditorProps>(
     const inputId = id || label.toLowerCase().replace(/\s+/g, "-");
 
     return (
-      <SimpleMDE id={inputId} className={`${styles.editor} ${className}`} {...props} ref={ref} />
+      <SimpleMDE id={inputId} className={`w-full min-h-50 ${className}`} {...props} ref={ref} />
     );
   },
 );
