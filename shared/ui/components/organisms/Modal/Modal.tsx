@@ -25,7 +25,7 @@ export const Modal = ({ isOpen, onClose, title, children, footer }: ModalProps) 
       className="flex w-full max-w-150 flex-col gap-3 rounded-xl bg-white p-3"
       overlayClassName="fixed inset-0 flex items-center justify-center bg-black/50"
     >
-      <div className="flex h-4 w-full justify-center">
+      <div className="flex w-full justify-center">
         <h2>{title}</h2>
       </div>
       <div className="flex min-h-25 items-center justify-center gap-3">{children}</div>
